@@ -40,6 +40,10 @@ public class TrainApi {
         adapter = new RestAdapter<>(BuildConfig.API_ENDPOINT_TRAIN, BusClient.class);
     }
 
+    public void getArrivals(final Callback<ArrivalResponse> callback) {
+        adapter.getClient().getArrivals(BuildConfig.API_KEY_TRAIN, 40380, 10).enqueue(callback);
+    }
+
     public void testLocations() {
         adapter.getClient().getLocations(BuildConfig.API_KEY_TRAIN, "red").enqueue(
                 new Callback<LocationsResponse>() {
