@@ -1,4 +1,4 @@
-package com.radicalninja.transitwear.api.train;
+package com.radicalninja.transitwear.data.api.train;
 
 import org.simpleframework.xml.ElementList;
 import org.simpleframework.xml.Root;

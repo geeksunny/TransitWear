@@ -1,4 +1,4 @@
-package com.radicalninja.transitwear.api;
+package com.radicalninja.transitwear.data.api;
 
 import java.io.IOException;
 import java.util.HashMap;

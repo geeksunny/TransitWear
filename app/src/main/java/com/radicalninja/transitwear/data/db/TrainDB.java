@@ -1,4 +1,4 @@
-package com.radicalninja.transitwear.db;
+package com.radicalninja.transitwear.data.db;
 
 import com.raizlabs.android.dbflow.annotation.Database;
 

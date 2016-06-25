@@ -1,6 +1,6 @@
-package com.radicalninja.transitwear.model;
+package com.radicalninja.transitwear.data.model;
 
-import com.radicalninja.transitwear.db.TrainDB;
+import com.radicalninja.transitwear.data.db.TrainDB;
 import com.raizlabs.android.dbflow.annotation.Column;
 import com.raizlabs.android.dbflow.annotation.ConflictAction;
 import com.raizlabs.android.dbflow.annotation.PrimaryKey;

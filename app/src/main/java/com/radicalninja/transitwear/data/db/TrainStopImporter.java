@@ -1,10 +1,10 @@
-package com.radicalninja.transitwear.db;
+package com.radicalninja.transitwear.data.db;
 
 import android.util.Log;
 
 import com.opencsv.CSVReader;
 import com.radicalninja.transitwear.App;
-import com.radicalninja.transitwear.model.TrainStop;
+import com.radicalninja.transitwear.data.model.TrainStop;
 
 import java.io.IOException;
 import java.io.InputStream;

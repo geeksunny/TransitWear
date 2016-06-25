@@ -1,4 +1,4 @@
-package com.radicalninja.transitwear;
+package com.radicalninja.transitwear.ui;
 
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -19,7 +19,8 @@ import android.view.ViewGroup;
 
 import android.widget.TextView;
 
-import com.radicalninja.transitwear.api.TrainApi;
+import com.radicalninja.transitwear.R;
+import com.radicalninja.transitwear.data.api.TrainApi;
 
 public class MainActivity extends AppCompatActivity {
 

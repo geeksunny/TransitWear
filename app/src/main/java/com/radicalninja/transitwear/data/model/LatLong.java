@@ -1,4 +1,4 @@
-package com.radicalninja.transitwear.model;
+package com.radicalninja.transitwear.data.model;
 
 import com.raizlabs.android.dbflow.converter.TypeConverter;
 

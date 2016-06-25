@@ -1,4 +1,4 @@
-package com.radicalninja.transitwear.api;
+package com.radicalninja.transitwear.data.api;
 
 import com.radicalninja.transitwear.BuildConfig;
 

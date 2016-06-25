@@ -1,11 +1,11 @@
-package com.radicalninja.transitwear.api;
+package com.radicalninja.transitwear.data.api;
 
 import android.util.Log;
 
 import com.radicalninja.transitwear.BuildConfig;
-import com.radicalninja.transitwear.api.train.ArrivalResponse;
-import com.radicalninja.transitwear.api.train.FollowResponse;
-import com.radicalninja.transitwear.api.train.LocationsResponse;
+import com.radicalninja.transitwear.data.api.train.ArrivalResponse;
+import com.radicalninja.transitwear.data.api.train.FollowResponse;
+import com.radicalninja.transitwear.data.api.train.LocationsResponse;
 
 import retrofit2.Call;
 import retrofit2.Callback;
