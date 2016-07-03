@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--<string name="typeface_mobile_title_normal">SF-UI-Display-Regular.otf</string>-->
+    <!--<string name="typeface_mobile_title_thin">SF-UI-Display-Thin.otf</string>-->
+    <!--<string name="typeface_mobile_title_bold">SF-UI-Display-Bold.otf</string>-->
+
+    <!--<string name="typeface_mobile_text_normal">SF-UI-Text-Regular.otf</string>-->
+    <!--<string name="typeface_mobile_text_normal_italic">SF-UI-Text-RegularItalic.otf</string>-->
+    <!--<string name="typeface_mobile_text_thin">SF-UI-Text-Thin.otf</string>-->
+    <!--<string name="typeface_mobile_text_thin_italic">SF-UI-Text-ThinItalic.otf</string>-->
+    <!--<string name="typeface_mobile_text_bold">SF-UI-Text-Bold.otf</string>-->
+    <!--<string name="typeface_mobile_text_bold_italic">SF-UI-Text-BoldItalic.otf</string>-->
+
+    <!--<string name="typeface_wear_title_normal">SF-Compact-Display-Regular.otf</string>-->
+    <!--<string name="typeface_wear_title_thin">SF-Compact-Display-Thin.otf</string>-->
+    <!--<string name="typeface_wear_title_bold">SF-Compact-Display-Bold.otf</string>-->
+
+    <!--<string name="typeface_wear_text_normal">SF-Compact-Text-Regular.otf</string>-->
+    <!--<string name="typeface_wear_text_normal_italic">SF-Compact-Text-RegularItalic.otf</string>-->
+    <!--<string name="typeface_wear_text_thin">SF-Compact-Text-Thin.otf</string>-->
+    <!--<string name="typeface_wear_text_thin_italic">SF-Compact-Text-ThinItalic.otf</string>-->
+    <!--<string name="typeface_wear_text_bold">SF-Compact-Text-Bold.otf</string>-->
+    <!--<string name="typeface_wear_text_bold_italic">SF-Compact-Text-BoldItalic.otf</string>-->
+
+</resources>
