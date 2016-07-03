@@ -11,8 +11,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.radicalninja.transitwear.App;
 import com.radicalninja.transitwear.R;
+import com.radicalninja.transitwear.data.Preferences;
 import com.radicalninja.transitwear.ui.predictions.PredictionListFragment;
+import com.radicalninja.transitwear.ui.view.SplashView;
+import com.radicalninja.transitwear.ui.view.util.SplashHelper;
+import com.radicalninja.transitwear.util.SimpleCallback;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -33,9 +38,27 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        loadInitialFragment();
+        if (!Preferences.INSTANCE.isFirstAppStart()) {
+            final SimpleCallback callback = new SimpleCallback() {
+                @Override
+                public void onComplete() {
+                    loadInitialFragment();
+//                    startInterface();
+                }
+            };
+            App.getInstance().doInitialDataImport(callback);
+        } else {
+            loadInitialFragment();
+//            startInterface();
+        }
     }
 
+    public void startInterface() {
+//        loadInitialFragment();
+        final SplashView splashView = (SplashView) findViewById(R.id.splash);
+        final View view = findViewById(R.id.content);
+        SplashHelper.animateTransition(splashView, view, 850);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.radicalninja.transitwear.R;
 import com.radicalninja.transitwear.data.api.TrainApi;
 import com.radicalninja.transitwear.data.api.train.ArrivalResponse;
+import com.radicalninja.transitwear.ui.MainActivity;
 
 import java.util.Locale;
 
@@ -26,6 +27,14 @@ public class PredictionListFragment extends Fragment {
 
     private RecyclerView predictionListView;
     private PredictionsAdapter adapter;
+
+    private MainActivity activity;
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        activity = (MainActivity) getActivity();
+    }
 
     @Nullable
     @Override
@@ -41,18 +50,21 @@ public class PredictionListFragment extends Fragment {
     }
 
     @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
+    public void onStart() {
+        super.onStart();
         api.getArrivals(new Callback<ArrivalResponse>() {
             @Override
             public void onResponse(Call<ArrivalResponse> call, Response<ArrivalResponse> response) {
                 adapter.add(response.body().getArrivalPredictions());
                 final String msg = String.format(Locale.US, "%d items received.", response.body().getArrivalPredictions().size());
                 Toast.makeText(getActivity(), msg, Toast.LENGTH_SHORT).show();
+                activity.startInterface();
             }
 
             @Override
             public void onFailure(Call<ArrivalResponse> call, Throwable t) {
                 Toast.makeText(getActivity(), "API ERROR", Toast.LENGTH_SHORT).show();
+                activity.startInterface();
             }
         });
     }
