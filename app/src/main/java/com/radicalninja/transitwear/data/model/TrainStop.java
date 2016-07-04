@@ -1,6 +1,6 @@
 package com.radicalninja.transitwear.data.model;
 
-import com.radicalninja.transitwear.data.db.TrainDB;
+import com.radicalninja.transitwear.data.db.TransitDB;
 import com.raizlabs.android.dbflow.annotation.Column;
 import com.raizlabs.android.dbflow.annotation.ConflictAction;
 import com.raizlabs.android.dbflow.annotation.PrimaryKey;
@@ -9,7 +9,7 @@ import com.raizlabs.android.dbflow.annotation.Unique;
 import com.raizlabs.android.dbflow.annotation.UniqueGroup;
 import com.raizlabs.android.dbflow.structure.BaseModel;
 
-@Table(database = TrainDB.class,
+@Table(database = TransitDB.class,
         uniqueColumnGroups = {@UniqueGroup(groupNumber = 1, uniqueConflict = ConflictAction.FAIL)})
 public class TrainStop extends BaseModel {
 
@@ -19,7 +19,7 @@ public class TrainStop extends BaseModel {
 
     @Column
     @Unique(unique = false, uniqueGroups = 1)
-    private char directionId;
+    private Direction directionId;
 
     @Column
     private String stopName;
@@ -74,7 +74,7 @@ public class TrainStop extends BaseModel {
         return brown;
     }
 
-    public char getDirectionId() {
+    public Direction getDirectionId() {
         return directionId;
     }
 
@@ -142,7 +142,7 @@ public class TrainStop extends BaseModel {
         this.brown = brown;
     }
 
-    public void setDirectionId(char directionId) {
+    public void setDirectionId(Direction directionId) {
         this.directionId = directionId;
     }
 
@@ -230,7 +230,7 @@ public class TrainStop extends BaseModel {
     public static class Builder {
         private boolean blue;
         private boolean brown;
-        private char directionId;
+        private Direction directionId;
         private boolean green;
         private boolean isAdaAccessible;
         private LatLong location;
@@ -257,7 +257,7 @@ public class TrainStop extends BaseModel {
         }
 
         public Builder setDirectionId(String directionId) {
-            this.directionId = directionId.charAt(0);
+            this.directionId = Direction.fromCode(directionId.charAt(0));
             return this;
         }
 

@@ -8,9 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.radicalninja.transitwear.R;
-import com.radicalninja.transitwear.data.api.train.ArrivalPrediction;
 import com.radicalninja.transitwear.data.model.TrainStop;
-import com.radicalninja.transitwear.ui.predictions.PredictionUtils;
 
 import java.util.ArrayList;
 import java.util.List;
