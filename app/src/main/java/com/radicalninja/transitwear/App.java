@@ -44,7 +44,7 @@ public class App extends Application {
         @Override
         protected Void doInBackground(Void... voids) {
             try {
-                new TrainStopImporter().importStops();
+                new TrainStopImporter().runImport();
             } catch (IOException e) {
                 Log.e("App", "Error importing train stops.", e);
             }

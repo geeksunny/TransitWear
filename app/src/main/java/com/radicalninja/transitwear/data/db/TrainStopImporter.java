@@ -50,6 +50,17 @@ public class TrainStopImporter {
     }
 
     public void runImport() throws IOException {
+        // todo: check if data is already imported, throw exception if yes
+        // todo: clean this up
+        importRoutes();
+        importStops();
+    }
+
+    private void importRoutes() {
+        // todo: create Stop objects for train routes and save to db.
+    }
+
+    private void importStops() throws IOException {
         final InputStream csvInputStream = App.getInstance().getAssets().open("train_stops.csv");
         final CSVReader csvReader = new CSVReader(new InputStreamReader(csvInputStream));
         Log.d(TAG, "Beginning TrainStop Import Job from file (assets/train_stops.csv)");
