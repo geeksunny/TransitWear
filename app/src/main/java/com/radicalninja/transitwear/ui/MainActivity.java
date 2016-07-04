@@ -1,22 +1,11 @@
 package com.radicalninja.transitwear.ui;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
-import com.radicalninja.transitwear.App;
 import com.radicalninja.transitwear.R;
-import com.radicalninja.transitwear.data.Preferences;
-import com.radicalninja.transitwear.ui.predictions.PredictionListFragment;
-import com.radicalninja.transitwear.ui.view.SplashView;
-import com.radicalninja.transitwear.util.SimpleCallback;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -24,22 +13,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-
-        UiManager.init(this, R.id.container);
-        final View view = findViewById(R.id.content);
-        UiManager.INSTANCE.startApp(view);
+        UiManager.init(this);
+        UiManager.INSTANCE.startApp();
     }
 
     @Override

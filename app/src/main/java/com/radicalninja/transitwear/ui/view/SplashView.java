@@ -15,6 +15,9 @@ import android.widget.TextView;
 import com.radicalninja.transitwear.R;
 import com.radicalninja.transitwear.util.Utility;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class SplashView extends FrameLayout {
 
     private TextView title;
@@ -83,20 +86,29 @@ public class SplashView extends FrameLayout {
     }
 
     public void fadeIntoView(final View view, final long duration, @Nullable final Animation.AnimationListener animationListener) {
-        // TODO: add in visibility setting after animation completion?
+        final List<View> views = new ArrayList<>(1);
+        views.add(view);
+        fadeIntoViews(views, duration, animationListener);
+    }
+
+    public void fadeIntoViews(final List<View> views, final long duration, @Nullable final Animation.AnimationListener animationListener) {
         final AlphaAnimation animationFrom = new AlphaAnimation(1f, 0f);
         animationFrom.setDuration(duration);
-        animationFrom.setFillAfter(true);
         if (null != animationListener) {
             animationFrom.setAnimationListener(animationListener);
         }
         final AlphaAnimation animationTo = new AlphaAnimation(0f, 1f);
         animationTo.setDuration(duration);
-        animationTo.setFillAfter(true);
+
         this.setAnimation(animationFrom);
-        view.setAnimation(animationTo);
+
         this.animate();
-        view.animate();
+        this.setVisibility(GONE);
+        for (final View view : views) {
+            view.setVisibility(VISIBLE);
+            view.setAnimation(animationTo);
+            view.animate();
+        }
     }
 
     public void fade(final boolean fadeIn, final long duration, @Nullable final Animation.AnimationListener animationListener) {
@@ -108,9 +120,9 @@ public class SplashView extends FrameLayout {
         if (null != animationListener) {
             animation.setAnimationListener(animationListener);
         }
-        animation.setFillAfter(true);
         this.setAnimation(animation);
         this.animate();
+        setVisibility(fadeIn ? VISIBLE : GONE);
     }
 
 }

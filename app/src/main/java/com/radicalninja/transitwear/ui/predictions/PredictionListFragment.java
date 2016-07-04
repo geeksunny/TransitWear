@@ -13,7 +13,6 @@ import android.widget.Toast;
 import com.radicalninja.transitwear.R;
 import com.radicalninja.transitwear.data.api.TrainApi;
 import com.radicalninja.transitwear.data.api.train.ArrivalResponse;
-import com.radicalninja.transitwear.ui.MainActivity;
 import com.radicalninja.transitwear.ui.UiManager;
 
 import java.util.Locale;
@@ -28,14 +27,6 @@ public class PredictionListFragment extends Fragment {
 
     private RecyclerView predictionListView;
     private PredictionsAdapter adapter;
-
-    private MainActivity activity;
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        activity = (MainActivity) getActivity();
-    }
 
     @Nullable
     @Override
