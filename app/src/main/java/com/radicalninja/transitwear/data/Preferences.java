@@ -20,7 +20,7 @@ public enum Preferences {
     }
 
     public boolean isFirstAppStart() {
-        return prefs.getBoolean(KEY_FIRST_START, false);
+        return prefs.getBoolean(KEY_FIRST_START, true);
     }
 
     public void setFirstAppStart(final boolean started) {
