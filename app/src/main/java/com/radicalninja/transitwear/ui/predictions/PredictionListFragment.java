@@ -14,6 +14,7 @@ import com.radicalninja.transitwear.R;
 import com.radicalninja.transitwear.data.api.TrainApi;
 import com.radicalninja.transitwear.data.api.train.ArrivalResponse;
 import com.radicalninja.transitwear.ui.MainActivity;
+import com.radicalninja.transitwear.ui.UiManager;
 
 import java.util.Locale;
 
@@ -56,15 +57,17 @@ public class PredictionListFragment extends Fragment {
             @Override
             public void onResponse(Call<ArrivalResponse> call, Response<ArrivalResponse> response) {
                 adapter.add(response.body().getArrivalPredictions());
+                adapter.add(response.body().getArrivalPredictions());
+                adapter.add(response.body().getArrivalPredictions());
                 final String msg = String.format(Locale.US, "%d items received.", response.body().getArrivalPredictions().size());
                 Toast.makeText(getActivity(), msg, Toast.LENGTH_SHORT).show();
-                activity.startInterface();
+                UiManager.INSTANCE.stopLoading();
             }
 
             @Override
             public void onFailure(Call<ArrivalResponse> call, Throwable t) {
                 Toast.makeText(getActivity(), "API ERROR", Toast.LENGTH_SHORT).show();
-                activity.startInterface();
+                UiManager.INSTANCE.stopLoading();
             }
         });
     }
