@@ -1,13 +1,19 @@
 package com.radicalninja.transitwear.ui.view;
 
+import android.animation.Animator;
 import android.content.Context;
 import android.graphics.PorterDuff;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewPropertyAnimator;
+import android.view.animation.AccelerateInterpolator;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
+import android.view.animation.AnimationSet;
+import android.view.animation.TranslateAnimation;
 import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -85,44 +91,24 @@ public class SplashView extends FrameLayout {
         hideTitle(inOverlayMode);
     }
 
-    public void fadeIntoView(final View view, final long duration, @Nullable final Animation.AnimationListener animationListener) {
-        final List<View> views = new ArrayList<>(1);
-        views.add(view);
-        fadeIntoViews(views, duration, animationListener);
-    }
-
-    public void fadeIntoViews(final List<View> views, final long duration, @Nullable final Animation.AnimationListener animationListener) {
-        final AlphaAnimation animationFrom = new AlphaAnimation(1f, 0f);
-        animationFrom.setDuration(duration);
-        if (null != animationListener) {
-            animationFrom.setAnimationListener(animationListener);
-        }
-        final AlphaAnimation animationTo = new AlphaAnimation(0f, 1f);
-        animationTo.setDuration(duration);
-
-        this.setAnimation(animationFrom);
-
-        this.animate();
-        this.setVisibility(GONE);
-        for (final View view : views) {
-            view.setVisibility(VISIBLE);
-            view.setAnimation(animationTo);
-            view.animate();
-        }
-    }
-
-    public void fade(final boolean fadeIn, final long duration, @Nullable final Animation.AnimationListener animationListener) {
-        // TODO: add in visibility setting after animation completion?
+    public void fade(final boolean fadeIn, final float xyScale, final long duration,
+                        @Nullable final Animator.AnimatorListener animationListener) {
         final float alphaStart = fadeIn ? 0f : 1f;
         final float alphaEnd = fadeIn ? 1f : 0f;
-        final AlphaAnimation animation = new AlphaAnimation(alphaStart, alphaEnd);
-        animation.setDuration(duration);
-        if (null != animationListener) {
-            animation.setAnimationListener(animationListener);
-        }
-        this.setAnimation(animation);
-        this.animate();
-        setVisibility(fadeIn ? VISIBLE : GONE);
+
+        final float scale = fadeIn ? xyScale : -xyScale;
+        final float scaleStart = fadeIn ? 1f - xyScale : 1f;
+        Log.e("abc", "scaleStart "+scaleStart+" xyScale "+xyScale);
+
+        setScaleX(scaleStart);
+        setScaleY(scaleStart);
+        setAlpha(alphaStart);
+        final ViewPropertyAnimator animator = animate().
+                scaleXBy(scale).scaleYBy(scale).alpha(alphaEnd).
+                setDuration(duration).
+                setInterpolator(new AccelerateInterpolator()).
+                setListener(animationListener);
+        animator.start();
     }
 
 }
