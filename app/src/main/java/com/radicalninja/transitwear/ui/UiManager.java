@@ -13,6 +13,7 @@ import android.view.View;
 import com.radicalninja.transitwear.App;
 import com.radicalninja.transitwear.R;
 import com.radicalninja.transitwear.data.Preferences;
+import com.radicalninja.transitwear.ui.home.HomeFragment;
 import com.radicalninja.transitwear.ui.predictions.PredictionListFragment;
 import com.radicalninja.transitwear.ui.view.SplashView;
 import com.radicalninja.transitwear.util.SimpleCallback;
@@ -81,7 +82,7 @@ public enum UiManager {
 
     private void loadInitialFragment() {
         FragmentTransaction tx = fragmentManager.beginTransaction();
-        tx.replace(contentFrameId, new PredictionListFragment());
+        tx.replace(contentFrameId, HomeFragment.newInstance());
         tx.commit();
     }
 

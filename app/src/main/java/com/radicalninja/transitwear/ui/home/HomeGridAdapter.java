@@ -1,6 +1,7 @@
 package com.radicalninja.transitwear.ui.home;
 
 import android.content.Context;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -138,6 +139,27 @@ public class HomeGridAdapter extends RecyclerView.Adapter<HomeGridAdapter.ViewHo
             case TYPE_UNKNOWN:
             default:
                 holder.setupView(getHeader(position));
+        }
+    }
+
+    public HomeGridSpanSizeLookup spanSizeLookup() {
+        return new HomeGridSpanSizeLookup();
+    }
+
+    class HomeGridSpanSizeLookup extends GridLayoutManager.SpanSizeLookup {
+
+        @Override
+        public int getSpanSize(int position) {
+            switch (getItemViewType(position)) {
+                case TYPE_TRAIN_ROUTE:
+                    return 1;
+                case TYPE_BUS_ROUTE:
+                case TYPE_HEADER:
+                case TYPE_UNKNOWN:
+                    return 2;
+                default:
+                    return -1;
+            }
         }
     }
 

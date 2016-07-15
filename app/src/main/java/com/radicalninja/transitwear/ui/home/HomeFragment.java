@@ -1,5 +1,6 @@
 package com.radicalninja.transitwear.ui.home;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -9,12 +10,27 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.radicalninja.transitwear.data.model.Route;
+import com.radicalninja.transitwear.ui.UiManager;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class HomeFragment extends Fragment {
 
-    private final HomeGridAdapter adapter;
+    public static HomeFragment newInstance() {
+        return new HomeFragment();
+    }
+
+    private HomeGridAdapter adapter;
 
     public HomeFragment() {
         super();
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
         adapter = new HomeGridAdapter(getContext());
     }
 
@@ -26,7 +42,9 @@ public class HomeFragment extends Fragment {
                 ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         view.setLayoutParams(params);
 
-        view.setLayoutManager(new GridLayoutManager(getContext(), 2));
+        final GridLayoutManager layoutManager = new GridLayoutManager(getContext(), 2);
+        layoutManager.setSpanSizeLookup(adapter.spanSizeLookup());
+        view.setLayoutManager(layoutManager);
         view.setAdapter(adapter);
 
         return view;
@@ -35,10 +53,32 @@ public class HomeFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        final List<Route> routes = new ArrayList<>();
+        routes.add(makeRoute());
+        routes.add(makeRoute());
+        routes.add(makeRoute());
+        routes.add(makeRoute());
+        routes.add(makeRoute());
+        routes.add(makeRoute());
+
+        adapter.addBusRoutes(routes);
+        adapter.addTrainRoutes(routes);
+
+        UiManager.INSTANCE.stopLoading();
+    }
+
+    Route makeRoute() {
+        final Route route = new Route();
+        route.setShortName("Red");
+        route.setLongName("Red Line");
+        route.setRouteId(1);
+        return route;
     }
 
     @Override
     public void onResume() {
         super.onResume();
     }
+
 }
