@@ -16,8 +16,6 @@ import java.util.List;
 
 public class HomeGridAdapter extends RecyclerView.Adapter<HomeGridAdapter.ViewHolder> {
 
-    private static final int HEADER_COUNT = 2;
-
     private static final int TYPE_UNKNOWN = -1;
     private static final int TYPE_HEADER = 0;
     private static final int TYPE_BUS_ROUTE = 1;
@@ -45,7 +43,8 @@ public class HomeGridAdapter extends RecyclerView.Adapter<HomeGridAdapter.ViewHo
 
     @Override
     public int getItemCount() {
-        return busRoutes.size() + trainRoutes.size() + HEADER_COUNT;
+        return busRoutes.size() + trainRoutes.size() +
+                getHeaderOffset(TYPE_BUS_ROUTE | TYPE_TRAIN_ROUTE);
     }
 
     @Override
@@ -59,6 +58,17 @@ public class HomeGridAdapter extends RecyclerView.Adapter<HomeGridAdapter.ViewHo
         } else {
             return TYPE_UNKNOWN;
         }
+    }
+
+    private int getHeaderOffset(final int itemViewType) {
+        int headers = 0;
+        if ((itemViewType & TYPE_BUS_ROUTE) == TYPE_BUS_ROUTE) {
+            headers += (busRoutes.size() > 0) ? 1 : 0;
+        }
+        if ((itemViewType & TYPE_TRAIN_ROUTE) == TYPE_TRAIN_ROUTE) {
+            headers += (trainRoutes.size() > 0) ? 1 : 0;
+        }
+        return headers;
     }
 
     public Route getItem(int position) {
@@ -85,16 +95,18 @@ public class HomeGridAdapter extends RecyclerView.Adapter<HomeGridAdapter.ViewHo
     public boolean isHeader(int position) {
         // Bus header: 1st item
         // Train header: After bus header + bus routes
-        return position == 0 || position == (busRoutes.size() + 1);
+        return position == 0 || position == (busRoutes.size() + getHeaderOffset(TYPE_BUS_ROUTE));
     }
 
     public boolean isBusRoute(int position) {
-        return position >= 1 && position < (busRoutes.size() + 1);
+        final int headers = getHeaderOffset(TYPE_BUS_ROUTE);
+        return position >= headers && position < (busRoutes.size() + headers);
     }
 
     public boolean isTrainRoute(int position) {
-        return position >= (busRoutes.size() + 2) &&
-                position < (busRoutes.size() + trainRoutes.size() + 2);
+        final int headers = getHeaderOffset(TYPE_BUS_ROUTE | TYPE_TRAIN_ROUTE);
+        return position >= (busRoutes.size() + headers) &&
+                position < (busRoutes.size() + trainRoutes.size() + headers);
     }
 
     @Override
