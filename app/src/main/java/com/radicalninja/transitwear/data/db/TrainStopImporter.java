@@ -4,7 +4,9 @@ import android.util.Log;
 
 import com.opencsv.CSVReader;
 import com.radicalninja.transitwear.App;
+import com.radicalninja.transitwear.data.model.Route;
 import com.radicalninja.transitwear.data.model.TrainStop;
+import com.radicalninja.transitwear.data.model.Type;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -57,7 +59,16 @@ public class TrainStopImporter {
     }
 
     private void importRoutes() {
-        // todo: create Stop objects for train routes and save to db.
+        Log.d(TAG, "Saving train routes with dbflow");
+        new Route("red", "Red", "Red Line", Type.TRAIN).save();
+        new Route("blue", "Blue", "Blue Line", Type.TRAIN).save();
+        new Route("brn", "Brown", "Brown Line", Type.TRAIN).save();
+        new Route("g", "Green", "Green Line", Type.TRAIN).save();
+        new Route("org", "Orange", "Orange Line", Type.TRAIN).save();
+        new Route("p", "Purple", "Purple Line", Type.TRAIN).save();
+        new Route("pexp", "Purple Express", "Purple Line Express", Type.TRAIN).save();
+        new Route("pink", "Pink", "Pink Line", Type.TRAIN).save();
+        new Route("y", "Yellow", "Yellow Line", Type.TRAIN).save();
     }
 
     private void importStops() throws IOException {

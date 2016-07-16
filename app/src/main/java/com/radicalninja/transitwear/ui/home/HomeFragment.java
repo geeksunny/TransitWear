@@ -12,6 +12,8 @@ import android.view.ViewGroup;
 
 import com.radicalninja.transitwear.data.model.Route;
 import com.radicalninja.transitwear.ui.UiManager;
+import com.raizlabs.android.dbflow.sql.language.SQLite;
+import com.raizlabs.android.dbflow.structure.database.transaction.QueryTransaction;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,27 +55,29 @@ public class HomeFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        retrieveRouteList();
+    }
 
-        final List<Route> routes = new ArrayList<>();
-        routes.add(makeRoute());
-        routes.add(makeRoute());
-        routes.add(makeRoute());
-        routes.add(makeRoute());
-        routes.add(makeRoute());
-        routes.add(makeRoute());
+    private void displayRoutes(final List<Route> routes) {
+        if (null == routes || routes.size() == 0) {
+            // toast no routes found
+        }
 
-        adapter.addBusRoutes(routes);
+//        adapter.addBusRoutes(routes);
         adapter.addTrainRoutes(routes);
-
         UiManager.INSTANCE.stopLoading();
     }
 
-    Route makeRoute() {
-        final Route route = new Route();
-        route.setShortName("Red");
-        route.setLongName("Red Line");
-        route.setRouteId(1);
-        return route;
+    private void retrieveRouteList() {
+        SQLite.select()
+                .from(Route.class)
+                .async()
+                .queryListResultCallback(new QueryTransaction.QueryResultListCallback<Route>() {
+                    @Override
+                    public void onListQueryResult(QueryTransaction transaction, @Nullable List<Route> tResult) {
+                        displayRoutes(tResult);
+                    }
+                }).execute();
     }
 
     @Override

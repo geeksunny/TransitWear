@@ -75,9 +75,9 @@ public class HomeGridAdapter extends RecyclerView.Adapter<HomeGridAdapter.ViewHo
     public Route getItem(int position) {
         if (isBusRoute(position)) {
             // tODO: make the -1 offset programmatically calculated
-            return busRoutes.get(position - 1);
+            return busRoutes.get(position - getHeaderOffset(TYPE_BUS_ROUTE));
         } else if (isTrainRoute(position)) {
-            return trainRoutes.get(position - busRoutes.size() - 2);
+            return trainRoutes.get(position - busRoutes.size() - getHeaderOffset(TYPE_BUS_ROUTE | TYPE_TRAIN_ROUTE));
         } else {
             return null;
         }
@@ -86,7 +86,7 @@ public class HomeGridAdapter extends RecyclerView.Adapter<HomeGridAdapter.ViewHo
     public String getHeader(int position) {
         if (position == 0) {
             return context.getString(R.string.header_bus_routes);
-        } else if (position == busRoutes.size() + 1) {
+        } else if (position == busRoutes.size() + getHeaderOffset(TYPE_BUS_ROUTE)) {
             return context.getString(R.string.header_train_routes);
         } else {
             return context.getString(R.string.header_unknown);

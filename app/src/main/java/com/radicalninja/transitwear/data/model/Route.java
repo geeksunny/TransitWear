@@ -4,19 +4,42 @@ import com.radicalninja.transitwear.data.db.TransitDB;
 import com.raizlabs.android.dbflow.annotation.Column;
 import com.raizlabs.android.dbflow.annotation.PrimaryKey;
 import com.raizlabs.android.dbflow.annotation.Table;
+import com.raizlabs.android.dbflow.annotation.Unique;
 import com.raizlabs.android.dbflow.structure.BaseModel;
 
 @Table(database = TransitDB.class)
 public class Route extends BaseModel{
 
-    @PrimaryKey
-    private int routeId;
+    @PrimaryKey(autoincrement = true)
+    private int _id;
+    @Column
+    @Unique
+    private String routeId;
     @Column
     private Type type;
     @Column
     private String longName;
     @Column
     private String shortName;
+
+    public Route() {
+        //
+    }
+
+    public Route(String routeId, String shortName, String longName, Type type) {
+        this.routeId = routeId;
+        this.shortName = shortName;
+        this.longName = longName;
+        this.type = type;
+    }
+
+    public int get_id() {
+        return _id;
+    }
+
+    public void set_id(int _id) {
+        this._id = _id;
+    }
 
     public String getLongName() {
         return longName;
@@ -26,11 +49,11 @@ public class Route extends BaseModel{
         this.longName = longName;
     }
 
-    public int getRouteId() {
+    public String getRouteId() {
         return routeId;
     }
 
-    public void setRouteId(int routeId) {
+    public void setRouteId(String routeId) {
         this.routeId = routeId;
     }
 
