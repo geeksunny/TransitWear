@@ -58,7 +58,7 @@ public class HomeFragment extends Fragment {
             // toast no routes found
         }
 
-//        gridManager.addBusRoutes(routes);
+        gridManager.addBusRoutes(routes);
         gridManager.addTrainRoutes(routes);
         UiManager.INSTANCE.stopLoading();
     }

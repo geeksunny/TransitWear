@@ -41,6 +41,7 @@ public class HomeGridManager {
         recyclerView.setAdapter(adapter);
         recyclerView.addItemDecoration(new HomeGridItemDecoration(24, 12, 24, 6));
         recyclerView.addOnItemTouchListener(new HomeGridItemClickListener(context));
+        // recyclerView.setItemAnimator();
     }
 
     public void setSpanCount(final int spanCount) {
@@ -56,6 +57,10 @@ public class HomeGridManager {
         adapter.addTrainRoutes(routes);
     }
 
+    public Route getItem(final int position) {
+        return adapter.getItem(position);
+    }
+
     class HomeGridItemClickListener extends RecyclerItemClickListener {
 
         // TODO: Implement long-click + drag for grid item movement and list rearrangement.
@@ -64,15 +69,29 @@ public class HomeGridManager {
             super(context);
         }
 
+        String getTitle(int position) {
+            switch (adapter.getItemViewType(position)) {
+                case HomeGridAdapter.TYPE_BUS_ROUTE:
+                case HomeGridAdapter.TYPE_TRAIN_ROUTE:
+                    final Route route = getItem(position);
+                    return (null != route) ? route.getLongName() : "Null Route";
+                case HomeGridAdapter.TYPE_HEADER:
+                case HomeGridAdapter.TYPE_UNKNOWN:
+                    return adapter.getHeader(position);
+                default:
+                    return "(None of the above!)";
+            }
+        }
+
         @Override
         void onItemClick(View view, int position) {
-            Snackbar.make(view, "Item clicked: "+position, Snackbar.LENGTH_LONG)
+            Snackbar.make(view, "Item clicked: "+getTitle(position), Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show();
         }
 
         @Override
         void onItemLongClick(View view, int position) {
-            Snackbar.make(view, "Item long clicked: "+position, Snackbar.LENGTH_LONG)
+            Snackbar.make(view, "Item long clicked: "+getTitle(position), Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show();
         }
     }

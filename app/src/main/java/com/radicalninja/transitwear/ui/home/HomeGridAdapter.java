@@ -18,10 +18,10 @@ import java.util.List;
 
 public class HomeGridAdapter extends RecyclerView.Adapter<HomeGridAdapter.ViewHolder> {
 
-    private static final int TYPE_UNKNOWN = -1;
-    private static final int TYPE_HEADER = 0;
-    private static final int TYPE_BUS_ROUTE = 1;
-    private static final int TYPE_TRAIN_ROUTE = 2;
+    static final int TYPE_UNKNOWN = -1;
+    static final int TYPE_HEADER = 0;
+    static final int TYPE_BUS_ROUTE = 1;
+    static final int TYPE_TRAIN_ROUTE = 2;
 
     final Context context;
     final LayoutInflater inflater;
@@ -178,15 +178,15 @@ public class HomeGridAdapter extends RecyclerView.Adapter<HomeGridAdapter.ViewHo
         }
     }
 
+    // TODO: Separate ViewHolder classes for each type
+
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         final TextView title, name;
-        final ImageView image;
         final View circle;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            image = (ImageView) itemView.findViewById(R.id.route_image);
             title = (TextView) itemView.findViewById(R.id.route_title);
             name = (TextView) itemView.findViewById(R.id.route_name);
             circle = itemView.findViewById(R.id.route_circle);
@@ -197,7 +197,10 @@ public class HomeGridAdapter extends RecyclerView.Adapter<HomeGridAdapter.ViewHo
             switch (getItemViewType()) {
                 case TYPE_BUS_ROUTE:
                     title.setText(route.getShortName());
+                    name.setText(route.getLongName());
+                    break;
                 case TYPE_TRAIN_ROUTE:
+                    title.setText(route.getShortName());
                     name.setText(route.getLongName());
                     circle.getBackground().setColorFilter(route.getColorHex(), PorterDuff.Mode.MULTIPLY);
                     break;

@@ -3,20 +3,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="horizontal"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:padding="8dp">
 
-    <ImageView
-        android:id="@+id/route_image"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    <com.radicalninja.transitwear.ui.view.SquareFrameLayout
+        android:visibility="gone"
+        android:id="@+id/route_circle"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/train_route_circle" />
 
     <TextView
+        android:padding="8dp"
         android:id="@+id/route_title"
         tools:text="66"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
     <TextView
+        android:padding="8dp"
         android:id="@+id/route_name"
         tools:text="Chicago Ave."
         android:layout_width="wrap_content"
