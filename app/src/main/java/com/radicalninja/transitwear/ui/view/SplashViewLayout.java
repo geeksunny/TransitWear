@@ -1,6 +1,5 @@
 package com.radicalninja.transitwear.ui.view;
 
-import android.animation.Animator;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.support.design.widget.AppBarLayout;
@@ -8,9 +7,6 @@ import android.support.design.widget.CoordinatorLayout;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class SplashViewLayout extends CoordinatorLayout {
 
