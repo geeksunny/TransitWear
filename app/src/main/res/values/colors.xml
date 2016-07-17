@@ -7,5 +7,6 @@
     <color name="primaryBackgroundColor">#f3f3eb</color>
     <color name="secondaryBackgroundColor">#8acef3</color>
     <color name="overlayBackground">#990177c1</color>
+    <color name="contentBackgroundColor">@android:color/white</color>
 
 </resources>

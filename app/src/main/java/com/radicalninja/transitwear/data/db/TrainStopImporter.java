@@ -60,15 +60,15 @@ public class TrainStopImporter {
 
     private void importRoutes() {
         Log.d(TAG, "Saving train routes with dbflow");
-        new Route("red", "Red", "Red Line", Type.TRAIN).save();
-        new Route("blue", "Blue", "Blue Line", Type.TRAIN).save();
-        new Route("brn", "Brown", "Brown Line", Type.TRAIN).save();
-        new Route("g", "Green", "Green Line", Type.TRAIN).save();
-        new Route("org", "Orange", "Orange Line", Type.TRAIN).save();
-        new Route("p", "Purple", "Purple Line", Type.TRAIN).save();
-        new Route("pexp", "Purple Express", "Purple Line Express", Type.TRAIN).save();
-        new Route("pink", "Pink", "Pink Line", Type.TRAIN).save();
-        new Route("y", "Yellow", "Yellow Line", Type.TRAIN).save();
+        new Route("red", "Red", "Red Line", Type.TRAIN, 0xffee254c).save();
+        new Route("blue", "Blue", "Blue Line", Type.TRAIN, 0xff487a9b).save();
+        new Route("brn", "Brown", "Brown Line", Type.TRAIN, 0xffa1857d).save();
+        new Route("g", "Green", "Green Line", Type.TRAIN, 0xff2f9463).save();
+        new Route("org", "Orange", "Orange Line", Type.TRAIN, 0xfff16f20).save();
+        new Route("p", "Purple", "Purple Line", Type.TRAIN, 0xff6b668d).save();
+        new Route("pexp", "Purple Express", "Purple Line Express", Type.TRAIN, 0xff6b668d).save();
+        new Route("pink", "Pink", "Pink Line", Type.TRAIN, 0xfff8bbc7).save();
+        new Route("y", "Yellow", "Yellow Line", Type.TRAIN, 0xfff9f304).save();
     }
 
     private void importStops() throws IOException {

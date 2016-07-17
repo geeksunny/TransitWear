@@ -1,6 +1,7 @@
 package com.radicalninja.transitwear.ui.home;
 
 import android.content.Context;
+import android.graphics.PorterDuff;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -167,12 +168,14 @@ public class HomeGridAdapter extends RecyclerView.Adapter<HomeGridAdapter.ViewHo
 
         final TextView title, name;
         final ImageView image;
+        final View circle;
 
         public ViewHolder(View itemView) {
             super(itemView);
             image = (ImageView) itemView.findViewById(R.id.route_image);
             title = (TextView) itemView.findViewById(R.id.route_title);
             name = (TextView) itemView.findViewById(R.id.route_name);
+            circle = itemView.findViewById(R.id.route_circle);
         }
 
         void setupView(final Route route) {
@@ -182,6 +185,7 @@ public class HomeGridAdapter extends RecyclerView.Adapter<HomeGridAdapter.ViewHo
                     title.setText(route.getShortName());
                 case TYPE_TRAIN_ROUTE:
                     name.setText(route.getLongName());
+                    circle.getBackground().setColorFilter(route.getColorHex(), PorterDuff.Mode.MULTIPLY);
                     break;
                 default:
                     // TODO: handle this.

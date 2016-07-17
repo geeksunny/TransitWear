@@ -21,16 +21,19 @@ public class Route extends BaseModel{
     private String longName;
     @Column
     private String shortName;
+    @Column
+    private int colorHex;
 
     public Route() {
         //
     }
 
-    public Route(String routeId, String shortName, String longName, Type type) {
+    public Route(String routeId, String shortName, String longName, Type type, int colorHex) {
         this.routeId = routeId;
         this.shortName = shortName;
         this.longName = longName;
         this.type = type;
+        this.colorHex = colorHex;
     }
 
     public int get_id() {
@@ -71,5 +74,13 @@ public class Route extends BaseModel{
 
     public void setType(Type type) {
         this.type = type;
+    }
+
+    public int getColorHex() {
+        return colorHex;
+    }
+
+    public void setColorHex(int colorHex) {
+        this.colorHex = colorHex;
     }
 }

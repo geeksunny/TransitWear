@@ -1,19 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.radicalninja.transitwear.ui.view.SquareCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="16dp"
+    app:cardBackgroundColor="@color/contentBackgroundColor"
+    app:cardCornerRadius="3dp"
+    android:elevation="12dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/route_name"
-        tools:text="Red Line"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="24dp">
 
-    <!--<ImageView-->
-        <!--android:id="@+id/route_image"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content" />-->
+        <TextView
+            android:visibility="gone"
+            android:id="@+id/route_name"
+            tools:text="Red Line"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
-</LinearLayout>
+        <View
+            android:id="@+id/route_circle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/train_route_circle" />
+
+        <!--<ImageView-->
+            <!--android:id="@+id/route_image"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content" />-->
+
+    </LinearLayout>
+
+</com.radicalninja.transitwear.ui.view.SquareCardView>
