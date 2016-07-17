@@ -4,7 +4,6 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,7 +14,6 @@ import com.radicalninja.transitwear.ui.UiManager;
 import com.raizlabs.android.dbflow.sql.language.SQLite;
 import com.raizlabs.android.dbflow.structure.database.transaction.QueryTransaction;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class HomeFragment extends Fragment {
@@ -24,7 +22,7 @@ public class HomeFragment extends Fragment {
         return new HomeFragment();
     }
 
-    private HomeGridAdapter adapter;
+    private HomeGridManager gridManager;
 
     public HomeFragment() {
         super();
@@ -33,7 +31,6 @@ public class HomeFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        adapter = new HomeGridAdapter(getContext());
     }
 
     @Nullable
@@ -44,10 +41,8 @@ public class HomeFragment extends Fragment {
                 ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         view.setLayoutParams(params);
 
-        final GridLayoutManager layoutManager = new GridLayoutManager(getContext(), 2);
-        layoutManager.setSpanSizeLookup(adapter.spanSizeLookup());
-        view.setLayoutManager(layoutManager);
-        view.setAdapter(adapter);
+        gridManager = new HomeGridManager(getContext(), view);
+        gridManager.setSpanCount(3);
 
         return view;
     }
@@ -63,8 +58,8 @@ public class HomeFragment extends Fragment {
             // toast no routes found
         }
 
-//        adapter.addBusRoutes(routes);
-        adapter.addTrainRoutes(routes);
+//        gridManager.addBusRoutes(routes);
+        gridManager.addTrainRoutes(routes);
         UiManager.INSTANCE.stopLoading();
     }
 

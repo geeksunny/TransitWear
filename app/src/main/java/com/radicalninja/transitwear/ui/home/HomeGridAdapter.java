@@ -28,6 +28,8 @@ public class HomeGridAdapter extends RecyclerView.Adapter<HomeGridAdapter.ViewHo
     final List<Route> busRoutes = new ArrayList<>();
     final List<Route> trainRoutes = new ArrayList<>();
 
+    private int spanCount = 1;
+
     public HomeGridAdapter(Context context) {
         this.context = context;
         inflater = LayoutInflater.from(context);
@@ -85,7 +87,7 @@ public class HomeGridAdapter extends RecyclerView.Adapter<HomeGridAdapter.ViewHo
     }
 
     public String getHeader(int position) {
-        if (position == 0) {
+        if (position == 0 && getHeaderOffset(TYPE_BUS_ROUTE) == 1) {
             return context.getString(R.string.header_bus_routes);
         } else if (position == busRoutes.size() + getHeaderOffset(TYPE_BUS_ROUTE)) {
             return context.getString(R.string.header_train_routes);
@@ -143,6 +145,18 @@ public class HomeGridAdapter extends RecyclerView.Adapter<HomeGridAdapter.ViewHo
         }
     }
 
+    public void makeCircleView() {
+        // TODO: Programmatically create the Circle drawable
+    }
+
+    public int getSpanCount() {
+        return spanCount;
+    }
+
+    public void setSpanCount(int spanCount) {
+        this.spanCount = spanCount;
+    }
+
     public HomeGridSpanSizeLookup spanSizeLookup() {
         return new HomeGridSpanSizeLookup();
     }
@@ -157,7 +171,7 @@ public class HomeGridAdapter extends RecyclerView.Adapter<HomeGridAdapter.ViewHo
                 case TYPE_BUS_ROUTE:
                 case TYPE_HEADER:
                 case TYPE_UNKNOWN:
-                    return 2;
+                    return spanCount;
                 default:
                     return -1;
             }
