@@ -23,10 +23,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
-        <!--<ImageView-->
-            <!--android:id="@+id/route_image"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content" />-->
+        <com.radicalninja.transitwear.ui.view.SquareFrameLayout
+            android:background="@drawable/train_route_circle"
+            android:id="@+id/route_circle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
     </LinearLayout>
 

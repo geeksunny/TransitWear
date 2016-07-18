@@ -7,7 +7,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.radicalninja.transitwear.R;
@@ -200,7 +199,6 @@ public class HomeGridAdapter extends RecyclerView.Adapter<HomeGridAdapter.ViewHo
                     name.setText(route.getLongName());
                     break;
                 case TYPE_TRAIN_ROUTE:
-                    title.setText(route.getShortName());
                     name.setText(route.getLongName());
                     circle.getBackground().setColorFilter(route.getColorHex(), PorterDuff.Mode.MULTIPLY);
                     break;
