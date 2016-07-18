@@ -23,6 +23,9 @@ public class BaseOuterResponse {
     @Element(name="tmst", required=false)
     String timestamp;
 
+    @Element(name="TimeStamp", required=false)
+    String _timestamp;
+
     public String getErrorName() {return this.errorName;}
     public void setErrorName(String value) {this.errorName = value;}
 
@@ -31,5 +34,8 @@ public class BaseOuterResponse {
 
     public String getTimestamp() {return this.timestamp;}
     public void setTimestamp(String value) {this.timestamp = value;}
+
+    public String get_Timestamp() {return this._timestamp;}
+    public void set_Timestamp(String value) {this._timestamp = value;}
 
 }

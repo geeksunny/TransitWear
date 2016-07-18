@@ -66,9 +66,13 @@ public class PredictionListFragment extends Fragment {
         api.getTrainArrivals(stop, new Callback<ArrivalResponse>() {
             @Override
             public void onResponse(Call<ArrivalResponse> call, Response<ArrivalResponse> response) {
-                adapter.add(response.body().getArrivalPredictions());
-                final String msg = String.format(Locale.US, "%d items received.", response.body().getArrivalPredictions().size());
-                Toast.makeText(getActivity(), msg, Toast.LENGTH_SHORT).show();
+                if (null != response && null != response.body() && null != response.body().getArrivalPredictions() && response.body().getArrivalPredictions().size() > 0) {
+                    adapter.add(response.body().getArrivalPredictions());
+                    final String msg = String.format(Locale.US, "%d items received.", response.body().getArrivalPredictions().size());
+                    Toast.makeText(getActivity(), msg, Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getActivity(), "No response objects!", Toast.LENGTH_SHORT).show();
+                }
                 UiManager.INSTANCE.stopLoading();
             }
 

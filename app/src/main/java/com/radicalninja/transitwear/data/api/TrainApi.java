@@ -44,7 +44,7 @@ public class TrainApi {
     }
 
     public void getTrainArrivals(final Stop stop, final Callback<ArrivalResponse> callback) {
-        adapter.getClient().getArrivals(BuildConfig.API_KEY_TRAIN, stop.getStopId(), DEFAULT_MAX).enqueue(callback);
+        adapter.getClient().getArrivals(BuildConfig.API_KEY_TRAIN, stop.getMapId(), DEFAULT_MAX).enqueue(callback);
     }
 
     public void testLocations() {
