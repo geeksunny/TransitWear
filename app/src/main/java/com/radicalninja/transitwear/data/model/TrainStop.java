@@ -11,7 +11,7 @@ import com.raizlabs.android.dbflow.structure.BaseModel;
 
 @Table(database = TransitDB.class,
         uniqueColumnGroups = {@UniqueGroup(groupNumber = 1, uniqueConflict = ConflictAction.FAIL)})
-public class TrainStop extends BaseModel {
+public class TrainStop extends BaseModel implements Stop {
 
     @PrimaryKey
     @Unique(unique = false, uniqueGroups = 1)
@@ -74,6 +74,7 @@ public class TrainStop extends BaseModel {
         return brown;
     }
 
+    @Override
     public Direction getDirectionId() {
         return directionId;
     }
@@ -86,10 +87,12 @@ public class TrainStop extends BaseModel {
         return isAdaAccessible;
     }
 
+    @Override
     public LatLong getLocation() {
         return location;
     }
 
+    @Override
     public int getMapId() {
         return mapId;
     }
@@ -114,18 +117,22 @@ public class TrainStop extends BaseModel {
         return red;
     }
 
+    @Override
     public String getStationDescription() {
         return stationDescription;
     }
 
+    @Override
     public String getStationName() {
         return stationName;
     }
 
+    @Override
     public int getStopId() {
         return stopId;
     }
 
+    @Override
     public String getStopName() {
         return stopName;
     }
@@ -142,6 +149,7 @@ public class TrainStop extends BaseModel {
         this.brown = brown;
     }
 
+    @Override
     public void setDirectionId(Direction directionId) {
         this.directionId = directionId;
     }
@@ -154,10 +162,12 @@ public class TrainStop extends BaseModel {
         isAdaAccessible = adaAccessible;
     }
 
+    @Override
     public void setLocation(LatLong location) {
         this.location = location;
     }
 
+    @Override
     public void setMapId(int mapId) {
         this.mapId = mapId;
     }
@@ -182,18 +192,22 @@ public class TrainStop extends BaseModel {
         this.red = red;
     }
 
+    @Override
     public void setStationDescription(String stationDescription) {
         this.stationDescription = stationDescription;
     }
 
+    @Override
     public void setStationName(String stationName) {
         this.stationName = stationName;
     }
 
+    @Override
     public void setStopId(int stopId) {
         this.stopId = stopId;
     }
 
+    @Override
     public void setStopName(String stopName) {
         this.stopName = stopName;
     }

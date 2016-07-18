@@ -1,4 +1,4 @@
-package com.radicalninja.transitwear.ui.routes;
+package com.radicalninja.transitwear.ui.stops;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -8,23 +8,23 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.radicalninja.transitwear.R;
-import com.radicalninja.transitwear.data.model.TrainStop;
+import com.radicalninja.transitwear.data.model.Stop;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class RoutesAdapter extends RecyclerView.Adapter<RoutesAdapter.ViewHolder> {
+public class StopsAdapter extends RecyclerView.Adapter<StopsAdapter.ViewHolder> {
 
     final Context context;
     final LayoutInflater inflater;
-    final List<TrainStop> stops = new ArrayList<>();
+    final List<Stop> stops = new ArrayList<>();
 
-    public RoutesAdapter(Context context) {
+    public StopsAdapter(Context context) {
         this.context = context;
         inflater = LayoutInflater.from(context);
     }
 
-    public void add(final List<TrainStop> stops) {
+    public void add(final List<Stop> stops) {
         this.stops.addAll(stops);
         notifyDataSetChanged();
     }

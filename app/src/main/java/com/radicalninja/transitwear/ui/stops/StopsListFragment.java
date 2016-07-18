@@ -1,4 +1,4 @@
-package com.radicalninja.transitwear.ui.routes;
+package com.radicalninja.transitwear.ui.stops;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -8,7 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class RoutesListFragment extends Fragment {
+public class StopsListFragment extends Fragment {
 
     @Nullable
     @Override

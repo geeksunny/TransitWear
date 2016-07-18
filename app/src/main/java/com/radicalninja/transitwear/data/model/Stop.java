@@ -1,13 +1,31 @@
 package com.radicalninja.transitwear.data.model;
 
 public interface Stop {
+    Direction getDirectionId();
+
+    LatLong getLocation();
+
+    int getMapId();
+
+    String getStationDescription();
+
+    String getStationName();
 
     int getStopId();
 
-    Type getType();
+    String getStopName();
 
-    String getLongName();
+    void setDirectionId(Direction directionId);
 
-    String getShortName();
+    void setLocation(LatLong location);
 
+    void setMapId(int mapId);
+
+    void setStationDescription(String stationDescription);
+
+    void setStationName(String stationName);
+
+    void setStopId(int stopId);
+
+    void setStopName(String stopName);
 }
