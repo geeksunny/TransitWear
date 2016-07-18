@@ -15,6 +15,8 @@ import java.util.List;
 
 public class StopsAdapter extends RecyclerView.Adapter<StopsAdapter.ViewHolder> {
 
+    // TODO: add list sorting
+
     final Context context;
     final LayoutInflater inflater;
     final List<Stop> stops = new ArrayList<>();
@@ -36,26 +38,25 @@ public class StopsAdapter extends RecyclerView.Adapter<StopsAdapter.ViewHolder> 
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        final View view = inflater.inflate(R.layout.prediction_list_item, parent, false);
+        final View view = inflater.inflate(R.layout.stop_list_item, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-//        final ArrivalPrediction prediction = stops.get(position);
-//        final String arrivalTime = PredictionUtils.getArrivalTimeString(prediction);
-//        holder.time.setText(arrivalTime);
-//        holder.title.setText(prediction.getStationName());
+        final Stop stop = stops.get(position);
+        holder.direction.setText(stop.getDirectionId().toString());
+        holder.name.setText(stop.getStopName());
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    class ViewHolder extends RecyclerView.ViewHolder {
 
-        final TextView title, time;
+        final TextView direction, name;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            title = (TextView) itemView.findViewById(R.id.predictionTitle);
-            time = (TextView) itemView.findViewById(R.id.predictionTime);
+            direction = (TextView) itemView.findViewById(R.id.stopDirection);
+            name = (TextView) itemView.findViewById(R.id.stopName);
         }
     }
 

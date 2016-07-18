@@ -15,9 +15,6 @@ import com.raizlabs.android.dbflow.structure.BaseModel;
 @ManyToMany(referencedTable = Route.class)
 public class TrainStop extends BaseModel implements Stop {
 
-    @PrimaryKey(autoincrement = true)
-    int _id;
-
     @PrimaryKey
     @Unique(unique = false, uniqueGroups = 1)
     private int stopId;

@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.UiThread;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.Toolbar;
@@ -13,7 +14,9 @@ import android.view.View;
 import com.radicalninja.transitwear.App;
 import com.radicalninja.transitwear.R;
 import com.radicalninja.transitwear.data.Preferences;
+import com.radicalninja.transitwear.data.model.Route;
 import com.radicalninja.transitwear.ui.home.HomeFragment;
+import com.radicalninja.transitwear.ui.stops.StopsListFragment;
 import com.radicalninja.transitwear.ui.view.SplashView;
 import com.radicalninja.transitwear.util.SimpleCallback;
 
@@ -79,10 +82,37 @@ public enum UiManager {
         }
     }
 
-    private void loadInitialFragment() {
+    public boolean back() {
+        if (fragmentManager.getBackStackEntryCount() > 1) {
+            fragmentManager.popBackStack();
+            return true;
+        }
+        return false;
+    }
+
+    private void loadFragment(final Fragment fragment) {
+        loadFragment(fragment, true);
+    }
+
+    private void loadFragment(final Fragment fragment, final boolean addToBackStack) {
         FragmentTransaction tx = fragmentManager.beginTransaction();
-        tx.replace(contentFrameId, HomeFragment.newInstance());
+        if (addToBackStack) {
+            tx.addToBackStack(null);
+        }
+        tx.replace(contentFrameId, fragment);
         tx.commit();
+    }
+
+    private void loadInitialFragment() {
+        loadFragment(HomeFragment.newInstance(), false);
+    }
+
+    public void toHomeFragment() {
+        loadFragment(HomeFragment.newInstance());
+    }
+
+    public void toStopsFragment(final Route route) {
+        loadFragment(StopsListFragment.newInstance(route));
     }
 
     public void stopLoading() {

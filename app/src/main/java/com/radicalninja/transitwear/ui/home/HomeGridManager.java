@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.radicalninja.transitwear.data.model.Route;
+import com.radicalninja.transitwear.ui.UiManager;
 
 import java.util.List;
 
@@ -85,8 +86,10 @@ public class HomeGridManager {
 
         @Override
         void onItemClick(View view, int position) {
-            Snackbar.make(view, "Item clicked: "+getTitle(position), Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show();
+            final Route route = getItem(position);
+            if (null != route) {
+                UiManager.INSTANCE.toStopsFragment(route);
+            }
         }
 
         @Override

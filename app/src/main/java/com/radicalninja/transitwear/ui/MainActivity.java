@@ -46,4 +46,10 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onBackPressed() {
+        if (!UiManager.INSTANCE.back()) {
+            super.onBackPressed();
+        }
+    }
 }
