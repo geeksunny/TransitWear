@@ -107,15 +107,6 @@ public class TrainStopImporter {
                 .setStationDescription(line[get(HEADER_STATIONDESC)])
                 .setMapId(line[get(HEADER_MAPID)])
                 .setIsAdaAccessible(line[get(HEADER_ADA)])
-                .setRed(line[get(HEADER_RED)])
-                .setBlue(line[get(HEADER_BLUE)])
-                .setGreen(line[get(HEADER_GREEN)])
-                .setBrown(line[get(HEADER_BROWN)])
-                .setPurple(line[get(HEADER_PURPLE)])
-                .setPurpleExpress(line[get(HEADER_PURPLEEXP)])
-                .setYellow(line[get(HEADER_YELLOW)])
-                .setPink(line[get(HEADER_PINK)])
-                .setOrange(line[get(HEADER_ORANGE)])
                 .setLocation(line[get(HEADER_LOCATION)])
                 .build();
     }
