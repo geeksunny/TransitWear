@@ -6,6 +6,7 @@ import com.radicalninja.transitwear.BuildConfig;
 import com.radicalninja.transitwear.data.api.train.ArrivalResponse;
 import com.radicalninja.transitwear.data.api.train.FollowResponse;
 import com.radicalninja.transitwear.data.api.train.LocationsResponse;
+import com.radicalninja.transitwear.data.model.Stop;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -14,6 +15,8 @@ import retrofit2.http.GET;
 import retrofit2.http.Query;
 
 public class TrainApi {
+
+    private final static int DEFAULT_MAX = 10;
 
     private final RestAdapter<BusClient> adapter;
 
@@ -40,8 +43,8 @@ public class TrainApi {
         adapter = new RestAdapter<>(BuildConfig.API_ENDPOINT_TRAIN, BusClient.class);
     }
 
-    public void getArrivals(final Callback<ArrivalResponse> callback) {
-        adapter.getClient().getArrivals(BuildConfig.API_KEY_TRAIN, 40380, 10).enqueue(callback);
+    public void getTrainArrivals(final Stop stop, final Callback<ArrivalResponse> callback) {
+        adapter.getClient().getArrivals(BuildConfig.API_KEY_TRAIN, stop.getStopId(), DEFAULT_MAX).enqueue(callback);
     }
 
     public void testLocations() {

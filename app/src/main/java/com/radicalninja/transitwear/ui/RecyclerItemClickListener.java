@@ -1,4 +1,4 @@
-package com.radicalninja.transitwear.ui.home;
+package com.radicalninja.transitwear.ui;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -8,8 +8,8 @@ import android.view.View;
 
 public abstract class RecyclerItemClickListener implements RecyclerView.OnItemTouchListener {
 
-    abstract void onItemClick(View view, int position);
-    abstract void onItemLongClick(View view, int position);
+    public abstract void onItemClick(View view, int position);
+    public abstract void onItemLongClick(View view, int position);
 
     private final GestureDetector gestureDetector;
 

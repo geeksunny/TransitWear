@@ -9,6 +9,8 @@ import android.widget.TextView;
 
 import com.radicalninja.transitwear.R;
 import com.radicalninja.transitwear.data.model.Stop;
+import com.radicalninja.transitwear.ui.RecyclerItemClickListener;
+import com.radicalninja.transitwear.ui.UiManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +33,10 @@ public class StopsAdapter extends RecyclerView.Adapter<StopsAdapter.ViewHolder> 
         notifyDataSetChanged();
     }
 
+    public Stop getItem(final int position) {
+        return stops.get(position);
+    }
+
     @Override
     public int getItemCount() {
         return stops.size();
@@ -47,6 +53,28 @@ public class StopsAdapter extends RecyclerView.Adapter<StopsAdapter.ViewHolder> 
         final Stop stop = stops.get(position);
         holder.direction.setText(stop.getDirectionId().toString());
         holder.name.setText(stop.getStopName());
+    }
+
+    public StopsItemClickListener clickListener() {
+        return new StopsItemClickListener(context);
+    }
+
+    class StopsItemClickListener extends RecyclerItemClickListener {
+
+        public StopsItemClickListener(Context context) {
+            super(context);
+        }
+
+        @Override
+        public void onItemClick(View view, int position) {
+            final Stop stop = getItem(position);
+            UiManager.INSTANCE.toPredictionsFragment(stop);
+        }
+
+        @Override
+        public void onItemLongClick(View view, int position) {
+
+        }
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {

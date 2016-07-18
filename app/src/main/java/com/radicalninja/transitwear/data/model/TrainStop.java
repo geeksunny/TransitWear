@@ -1,5 +1,8 @@
 package com.radicalninja.transitwear.data.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.radicalninja.transitwear.data.db.TransitDB;
 import com.raizlabs.android.dbflow.annotation.Column;
 import com.raizlabs.android.dbflow.annotation.ConflictAction;
@@ -13,7 +16,7 @@ import com.raizlabs.android.dbflow.structure.BaseModel;
 @Table(database = TransitDB.class,
         uniqueColumnGroups = {@UniqueGroup(groupNumber = 1, uniqueConflict = ConflictAction.FAIL)})
 @ManyToMany(referencedTable = Route.class)
-public class TrainStop extends BaseModel implements Stop {
+public class TrainStop extends BaseModel implements Stop, Parcelable {
 
     @PrimaryKey
     @Unique(unique = false, uniqueGroups = 1)
@@ -132,6 +135,47 @@ public class TrainStop extends BaseModel implements Stop {
                 ", location=" + location +
                 '}';
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(this.stopId);
+        dest.writeInt(this.directionId == null ? -1 : this.directionId.ordinal());
+        dest.writeString(this.stopName);
+        dest.writeString(this.stationName);
+        dest.writeString(this.stationDescription);
+        dest.writeInt(this.mapId);
+        dest.writeByte(this.isAdaAccessible ? (byte) 1 : (byte) 0);
+        dest.writeSerializable(this.location);
+    }
+
+    protected TrainStop(Parcel in) {
+        this.stopId = in.readInt();
+        int tmpDirectionId = in.readInt();
+        this.directionId = tmpDirectionId == -1 ? null : Direction.values()[tmpDirectionId];
+        this.stopName = in.readString();
+        this.stationName = in.readString();
+        this.stationDescription = in.readString();
+        this.mapId = in.readInt();
+        this.isAdaAccessible = in.readByte() != 0;
+        this.location = (LatLong) in.readSerializable();
+    }
+
+    public static final Parcelable.Creator<TrainStop> CREATOR = new Parcelable.Creator<TrainStop>() {
+        @Override
+        public TrainStop createFromParcel(Parcel source) {
+            return new TrainStop(source);
+        }
+
+        @Override
+        public TrainStop[] newArray(int size) {
+            return new TrainStop[size];
+        }
+    };
 
     public static class Builder {
         private Direction directionId;

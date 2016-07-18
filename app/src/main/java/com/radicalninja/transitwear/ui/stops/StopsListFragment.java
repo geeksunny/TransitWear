@@ -56,6 +56,7 @@ public class StopsListFragment extends Fragment {
         view.setLayoutParams(params);
         view.setLayoutManager(new LinearLayoutManager(getActivity()));
         view.setAdapter(adapter);
+        view.addOnItemTouchListener(adapter.clickListener());
 
         return view;
     }
