@@ -3,6 +3,7 @@ package com.radicalninja.transitwear.data.model;
 import com.radicalninja.transitwear.data.db.TransitDB;
 import com.raizlabs.android.dbflow.annotation.Column;
 import com.raizlabs.android.dbflow.annotation.ConflictAction;
+import com.raizlabs.android.dbflow.annotation.ManyToMany;
 import com.raizlabs.android.dbflow.annotation.PrimaryKey;
 import com.raizlabs.android.dbflow.annotation.Table;
 import com.raizlabs.android.dbflow.annotation.Unique;
@@ -11,7 +12,11 @@ import com.raizlabs.android.dbflow.structure.BaseModel;
 
 @Table(database = TransitDB.class,
         uniqueColumnGroups = {@UniqueGroup(groupNumber = 1, uniqueConflict = ConflictAction.FAIL)})
+@ManyToMany(referencedTable = Route.class)
 public class TrainStop extends BaseModel implements Stop {
+
+    @PrimaryKey(autoincrement = true)
+    int _id;
 
     @PrimaryKey
     @Unique(unique = false, uniqueGroups = 1)

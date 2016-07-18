@@ -7,7 +7,7 @@ import java.util.Locale;
 
 public class LatLong implements Serializable {
 
-    private static final String FORMAT_STRING = "{%f, %f}";
+    private static final String FORMAT_STRING = "(%f,%f)";
 
     double latitude, longitude;
 
