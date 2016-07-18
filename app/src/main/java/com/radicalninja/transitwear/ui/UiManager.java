@@ -121,12 +121,17 @@ public enum UiManager {
         loadFragment(PredictionListFragment.newInstance(stop));
     }
 
+    // TODO: Better handling here, don't cancel any existing animation, etc
     public void stopLoading() {
-        splashView.fade(false, 0.15f, 500, null);
+        if (splashView.getAlpha() != 0) {
+            splashView.fade(false, 0.15f, 500, null);
+        }
     }
 
     public void startLoading() {
-        splashView.fade(true, 0.15f, 500, null);
+        if (splashView.getAlpha() != 1) {
+            splashView.fade(true, 0.15f, 500, null);
+        }
     }
 
 }
