@@ -18,9 +18,9 @@ public class TrainApi {
 
     private final static int DEFAULT_MAX = 10;
 
-    private final RestAdapter<BusClient> adapter;
+    private final RestAdapter<TrainClient> adapter;
 
-    private interface BusClient {
+    private interface TrainClient {
         @GET("ttarrivals.aspx")
         Call<ArrivalResponse> getArrivals(
                 @Query("key") String key, @Query("mapid") int mapid, @Query("max") int max);
@@ -40,7 +40,7 @@ public class TrainApi {
     }
 
     public TrainApi() {
-        adapter = new RestAdapter<>(BuildConfig.API_ENDPOINT_TRAIN, BusClient.class);
+        adapter = new RestAdapter<>(BuildConfig.API_ENDPOINT_TRAIN, TrainClient.class);
     }
 
     public void getTrainArrivals(final Stop stop, final Callback<ArrivalResponse> callback) {
