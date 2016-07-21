@@ -11,11 +11,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.radicalninja.transitwear.data.db.QueryCallback;
+import com.radicalninja.transitwear.data.db.TransitDB;
 import com.radicalninja.transitwear.data.model.Route;
 import com.radicalninja.transitwear.data.model.Stop;
 import com.radicalninja.transitwear.data.model.TrainStop_Route;
-import com.radicalninja.transitwear.data.model.TrainStop_Route_Table;
-import com.raizlabs.android.dbflow.sql.language.SQLite;
 import com.raizlabs.android.dbflow.structure.database.transaction.QueryTransaction;
 import com.raizlabs.android.dbflow.structure.database.transaction.Transaction;
 
@@ -81,35 +81,33 @@ public class StopsListFragment extends Fragment {
 
     }
 
+    private QueryCallback<TrainStop_Route> trainQueryCallback = new QueryCallback.SimpleQueryCallback<TrainStop_Route>() {
+        @Override
+        public void onError(Transaction transaction, Throwable error) {
+            Log.e("abc", "trainStop_Route ERROR");
+        }
+
+        @Override
+        public void onListQueryResult(QueryTransaction transaction, @Nullable List<TrainStop_Route> tResult) {
+            if (null == tResult || tResult.size() == 0) {
+                // TODO: handle this case? This shouldn't happen though.
+                return;
+            }
+            final List<Stop> stops = new ArrayList<>(tResult.size());
+            for (final TrainStop_Route stop : tResult) {
+                stops.add(stop.getTrainStop());
+            }
+            adapter.add(stops);
+        }
+
+        @Override
+        public void onSuccess(Transaction transaction) {
+            Log.e("abc", "trainStop_Route SUCCESS");
+        }
+    };
+
     private void retrieveTrainStopList() {
-        SQLite.select()
-                .from(TrainStop_Route.class)
-                .where(TrainStop_Route_Table.route__id.eq(route.get_id()))
-                .async()
-                .queryListResultCallback(new QueryTransaction.QueryResultListCallback<TrainStop_Route>() {
-                    @Override
-                    public void onListQueryResult(QueryTransaction transaction, @Nullable List<TrainStop_Route> tResult) {
-                        if (null == tResult || tResult.size() == 0) {
-                            // TODO: handle this case? This shouldn't happen though.
-                            return;
-                        }
-                        final List<Stop> stops = new ArrayList<>(tResult.size());
-                        for (final TrainStop_Route stop : tResult) {
-                            stops.add(stop.getTrainStop());
-                        }
-                        adapter.add(stops);
-                    }
-                }).error(new Transaction.Error() {
-                    @Override
-                    public void onError(Transaction transaction, Throwable error) {
-                        Log.e("abc", "trainStop_Route ERROR");
-                    }
-                }).success(new Transaction.Success() {
-                    @Override
-                    public void onSuccess(Transaction transaction) {
-                        Log.e("abc", "trainStop_Route SUCCESS");
-                    }
-                }).execute();
+        TransitDB.getStopsForRoute(route.get_id(), trainQueryCallback);
     }
 
 }
