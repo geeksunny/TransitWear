@@ -26,9 +26,7 @@ public abstract class QueryCallback<T extends Model> implements
             return new Condition[] {ourCondition};
         } else {
             final Condition[] conditionList = new Condition[conditions.length + 1];
-            for (int i = 0; i < conditions.length; i++) {
-                conditionList[i] = conditions[i];
-            }
+            System.arraycopy(conditions, 0, conditionList, 0, conditions.length);
             conditionList[conditions.length + 1] = ourCondition;
             return conditionList;
         }
