@@ -2,6 +2,7 @@ package com.radicalninja.transitwear.ui;
 
 import android.os.Handler;
 import android.support.annotation.NonNull;
+import android.support.annotation.StringRes;
 import android.support.annotation.UiThread;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -90,6 +91,14 @@ public enum UiManager {
             return true;
         }
         return false;
+    }
+
+    public void setTitle(final CharSequence title) {
+        toolbar.setTitle(title);
+    }
+
+    public void setTitle(@StringRes final int titleResId) {
+        toolbar.setTitle(titleResId);
     }
 
     private void loadFragment(final Fragment fragment) {

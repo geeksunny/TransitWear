@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.radicalninja.transitwear.R;
 import com.radicalninja.transitwear.data.model.Route;
 import com.radicalninja.transitwear.ui.UiManager;
 import com.raizlabs.android.dbflow.sql.language.SQLite;
@@ -50,6 +51,7 @@ public class HomeFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        UiManager.INSTANCE.setTitle(R.string.app_name);
         retrieveRouteList();
     }
 

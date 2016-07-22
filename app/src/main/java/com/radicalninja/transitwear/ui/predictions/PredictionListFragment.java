@@ -60,6 +60,12 @@ public class PredictionListFragment extends Fragment {
     }
 
     @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        UiManager.INSTANCE.setTitle(stop.getStopName());
+    }
+
+    @Override
     public void onStart() {
         super.onStart();
         UiManager.INSTANCE.startLoading();

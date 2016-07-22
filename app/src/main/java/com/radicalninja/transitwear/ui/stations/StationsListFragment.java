@@ -16,6 +16,7 @@ import com.radicalninja.transitwear.data.db.TransitDB;
 import com.radicalninja.transitwear.data.model.Route;
 import com.radicalninja.transitwear.data.model.Stop;
 import com.radicalninja.transitwear.data.model.TrainStop_Route;
+import com.radicalninja.transitwear.ui.UiManager;
 import com.raizlabs.android.dbflow.structure.database.transaction.QueryTransaction;
 import com.raizlabs.android.dbflow.structure.database.transaction.Transaction;
 
@@ -64,6 +65,7 @@ public class StationsListFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        UiManager.INSTANCE.setTitle(route.getLongName());
         retrieveStopList();
     }
 
