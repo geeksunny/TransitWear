@@ -1,4 +1,4 @@
-package com.radicalninja.transitwear.ui.stops;
+package com.radicalninja.transitwear.ui.stations;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -15,7 +15,7 @@ import com.radicalninja.transitwear.ui.UiManager;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StopsAdapter extends RecyclerView.Adapter<StopsAdapter.ViewHolder> {
+public class StationsAdapter extends RecyclerView.Adapter<StationsAdapter.ViewHolder> {
 
     // TODO: add list sorting
 
@@ -23,7 +23,7 @@ public class StopsAdapter extends RecyclerView.Adapter<StopsAdapter.ViewHolder> 
     final LayoutInflater inflater;
     final List<Stop> stops = new ArrayList<>();
 
-    public StopsAdapter(Context context) {
+    public StationsAdapter(Context context) {
         this.context = context;
         inflater = LayoutInflater.from(context);
     }
@@ -51,8 +51,7 @@ public class StopsAdapter extends RecyclerView.Adapter<StopsAdapter.ViewHolder> 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         final Stop stop = stops.get(position);
-        holder.direction.setText(stop.getDirectionId().toString());
-        holder.name.setText(stop.getStopName());
+        holder.name.setText(stop.getStationName());
     }
 
     public StopsItemClickListener clickListener() {
@@ -79,11 +78,10 @@ public class StopsAdapter extends RecyclerView.Adapter<StopsAdapter.ViewHolder> 
 
     class ViewHolder extends RecyclerView.ViewHolder {
 
-        final TextView direction, name;
+        final TextView name;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            direction = (TextView) itemView.findViewById(R.id.stopDirection);
             name = (TextView) itemView.findViewById(R.id.stopName);
         }
     }

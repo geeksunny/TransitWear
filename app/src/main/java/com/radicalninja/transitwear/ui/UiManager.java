@@ -18,7 +18,7 @@ import com.radicalninja.transitwear.data.model.Route;
 import com.radicalninja.transitwear.data.model.Stop;
 import com.radicalninja.transitwear.ui.home.HomeFragment;
 import com.radicalninja.transitwear.ui.predictions.PredictionListFragment;
-import com.radicalninja.transitwear.ui.stops.StopsListFragment;
+import com.radicalninja.transitwear.ui.stations.StationsListFragment;
 import com.radicalninja.transitwear.ui.view.SplashView;
 import com.radicalninja.transitwear.util.SimpleCallback;
 
@@ -114,7 +114,7 @@ public enum UiManager {
     }
 
     public void toStopsFragment(final Route route) {
-        loadFragment(StopsListFragment.newInstance(route));
+        loadFragment(StationsListFragment.newInstance(route));
     }
 
     public void toPredictionsFragment(final Stop stop) {

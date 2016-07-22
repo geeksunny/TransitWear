@@ -7,6 +7,9 @@ public enum Direction {
     EAST('E'),
     WEST('W');
 
+    public static final Direction[] A = { NORTH, EAST };
+    public static final Direction[] B = { SOUTH, WEST };
+
     private final char code;
 
     Direction(final char directionCode) {

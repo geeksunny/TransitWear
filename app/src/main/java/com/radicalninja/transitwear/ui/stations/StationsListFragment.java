@@ -1,4 +1,4 @@
-package com.radicalninja.transitwear.ui.stops;
+package com.radicalninja.transitwear.ui.stations;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -22,26 +22,26 @@ import com.raizlabs.android.dbflow.structure.database.transaction.Transaction;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StopsListFragment extends Fragment {
+public class StationsListFragment extends Fragment {
 
     private static final String KEY_ROUTE_ID = "RouteIdNum";
 
-    public static StopsListFragment newInstance(final Route route) {
-        final StopsListFragment fragment = new StopsListFragment();
+    public static StationsListFragment newInstance(final Route route) {
+        final StationsListFragment fragment = new StationsListFragment();
         final Bundle bundle = new Bundle();
         bundle.putParcelable(KEY_ROUTE_ID, route);
         fragment.setArguments(bundle);
         return fragment;
     }
 
-    private StopsAdapter adapter;
+    private StationsAdapter adapter;
 
     private Route route;
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        adapter = new StopsAdapter(getActivity());
+        adapter = new StationsAdapter(getActivity());
     }
 
     @Nullable
@@ -107,7 +107,7 @@ public class StopsListFragment extends Fragment {
     };
 
     private void retrieveTrainStopList() {
-        TransitDB.getStopsForRoute(route.get_id(), trainQueryCallback);
+        TransitDB.getStationsForRoute(route.get_id(), trainQueryCallback);
     }
 
 }
