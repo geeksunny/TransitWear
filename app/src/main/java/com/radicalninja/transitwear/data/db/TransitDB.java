@@ -27,12 +27,28 @@ public class TransitDB {
     // TODO add some general CRUD methods with generic DbFlow Transaction objects and callbacks
     // TODO create ModelView query objects
 
+    // TODO Make methods for checking Stop type and use either train or bus database entries.
+
+    public static void getTrainStopReverseDirection(final TrainStop stop, @NonNull final QueryCallback.ResultCallback<TrainStop> callback) {
+        final Condition[] conditions = callback.conditions(
+                TrainStop_Table.mapId.eq(stop.getMapId()),
+                TrainStop_Table.directionId.isNot(stop.getDirectionId()));
+        SQLite.select()
+                .from(TrainStop.class)
+                .where(conditions)
+                .async()
+                .queryResultCallback(callback)
+                .error(callback)
+                .success(callback)
+                .execute();
+    }
+
     /**
      * Perform an asynchronous query for all stations for a given route.
      * @param routeId
      * @param callback
      */
-    public static void getStationsForRoute(final int routeId, @NonNull final QueryCallback<TrainStop_Route> callback) {
+    public static void getStationsForRoute(final int routeId, @NonNull final QueryCallback.ListResultCallback<TrainStop_Route> callback) {
         final Condition[] conditions =
                 callback.conditions(TrainStop_Route_Table.route__id.eq(routeId));
         // TODO: Clean up this query?

@@ -83,7 +83,7 @@ public class StationsListFragment extends Fragment {
 
     }
 
-    private QueryCallback<TrainStop_Route> trainQueryCallback = new QueryCallback.SimpleQueryCallback<TrainStop_Route>() {
+    private QueryCallback.ListResultCallback<TrainStop_Route> trainQueryCallback = new QueryCallback.SimpleListCallback<TrainStop_Route>() {
         @Override
         public void onError(Transaction transaction, Throwable error) {
             Log.e("abc", "trainStop_Route ERROR");
