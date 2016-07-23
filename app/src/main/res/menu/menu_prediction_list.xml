@@ -2,9 +2,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".ui.MainActivity">
+
     <item
-        android:id="@+id/action_settings"
+        android:id="@+id/action_reverse"
         android:orderInCategory="100"
-        android:title="@string/action_settings"
-        app:showAsAction="never" />
+        android:title="@string/action_reverse"
+        android:icon="@drawable/ic_swap_horiz_white_24dp"
+        app:showAsAction="always" />
+
 </menu>

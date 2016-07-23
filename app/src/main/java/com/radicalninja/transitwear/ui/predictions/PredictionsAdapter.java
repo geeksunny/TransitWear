@@ -24,7 +24,8 @@ public class PredictionsAdapter extends RecyclerView.Adapter<PredictionsAdapter.
         inflater = LayoutInflater.from(context);
     }
 
-    public void add(final List<ArrivalPrediction> predictions) {
+    public void set(final List<ArrivalPrediction> predictions) {
+        this.predictions.clear();
         this.predictions.addAll(predictions);
         notifyDataSetChanged();
     }
