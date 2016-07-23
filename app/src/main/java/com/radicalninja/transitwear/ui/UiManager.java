@@ -1,5 +1,6 @@
 package com.radicalninja.transitwear.ui;
 
+import android.animation.Animator;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
@@ -26,8 +27,9 @@ import com.radicalninja.transitwear.util.SimpleCallback;
 public enum UiManager {
 
     // TODO: Add nav drawer, fab, etc. management here.
-
     INSTANCE;
+
+    private static final float SPLASH_FADE_SCALE = 0.15f;
 
     private static Handler uiHandler;
 
@@ -37,6 +39,7 @@ public enum UiManager {
     private Toolbar toolbar;
     private FloatingActionButton fab;
 
+    private boolean hasLoaded;
     private boolean isSplashMode;
 
     public static void postToUiThread(final Runnable r) {
@@ -65,7 +68,7 @@ public enum UiManager {
     final View.OnClickListener fabClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "Find stops near me", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
         }
     };
@@ -133,13 +136,31 @@ public enum UiManager {
     // TODO: Better handling here, don't cancel any existing animation, etc
     public void stopLoading() {
         if (splashView.getAlpha() != 0) {
-            splashView.fade(false, 0.15f, 500, null);
+            final Animator.AnimatorListener listener;
+            if (isSplashMode) {
+                listener = new Animator.AnimatorListener() {
+                    @Override public void onAnimationCancel(Animator animator) { }
+                    @Override public void onAnimationStart(Animator animator) { }
+                    @Override public void onAnimationRepeat(Animator animator) { }
+
+                    @Override
+                    public void onAnimationEnd(Animator animator) {
+                        isSplashMode = false;
+                        splashView.setOverlayMode(true);
+                    }
+                };
+            } else {
+                listener = null;
+            }
+            final float scale = isSplashMode ? SPLASH_FADE_SCALE : -SPLASH_FADE_SCALE;
+            splashView.fade(false, scale, 500, listener);
         }
     }
 
     public void startLoading() {
         if (splashView.getAlpha() != 1) {
-            splashView.fade(true, 0.15f, 500, null);
+            final float scale = isSplashMode ? SPLASH_FADE_SCALE : -SPLASH_FADE_SCALE;
+            splashView.fade(true, scale, 500, null);
         }
     }
 
