@@ -51,12 +51,12 @@ public class HomeGridManager {
         adapter.setSpanCount(spanCount);
     }
 
-    public void addBusRoutes(final List<Route> routes) {
-        adapter.addBusRoutes(routes);
+    public void setBusRoutes(final List<Route> routes) {
+        adapter.setBusRoutes(routes);
     }
 
-    public void addTrainRoutes(final List<Route> routes) {
-        adapter.addTrainRoutes(routes);
+    public void setTrainRoutes(final List<Route> routes) {
+        adapter.setTrainRoutes(routes);
     }
 
     public Route getItem(final int position) {
@@ -117,7 +117,8 @@ public class HomeGridManager {
 
         @Override
         public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
-            //parent.getChildAdapterPosition(view);
+            final int layoutPosition = parent.getChildAdapterPosition(view);
+            final int column = adapter.getColumn(layoutPosition);
             //super.getItemOffsets(outRect, view, parent, state);
             outRect.set(left, top, right, bottom);
         }

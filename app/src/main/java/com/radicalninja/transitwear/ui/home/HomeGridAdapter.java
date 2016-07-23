@@ -34,12 +34,14 @@ public class HomeGridAdapter extends RecyclerView.Adapter<HomeGridAdapter.ViewHo
         inflater = LayoutInflater.from(context);
     }
 
-    public void addBusRoutes(final List<Route> busRoutes) {
+    public void setBusRoutes(final List<Route> busRoutes) {
+        this.busRoutes.clear();
         this.busRoutes.addAll(busRoutes);
         notifyDataSetChanged();
     }
 
-    public void addTrainRoutes(final List<Route> trainRoutes) {
+    public void setTrainRoutes(final List<Route> trainRoutes) {
+        this.trainRoutes.clear();
         this.trainRoutes.addAll(trainRoutes);
         notifyDataSetChanged();
     }
@@ -93,6 +95,16 @@ public class HomeGridAdapter extends RecyclerView.Adapter<HomeGridAdapter.ViewHo
         } else {
             return context.getString(R.string.header_unknown);
         }
+    }
+
+    public int getColumn(final int adapterPosition) {
+        // TODO: Check if row, return 0 if row; divide grid position by column count for column number.
+        if (getItemViewType(adapterPosition) == TYPE_TRAIN_ROUTE) {
+            final int trainPos = adapterPosition -
+                    (busRoutes.size() - getHeaderOffset(TYPE_BUS_ROUTE | TYPE_TRAIN_ROUTE)) + 1;
+            return (trainPos % spanCount) + 1;
+        }
+        return 0;
     }
 
     public boolean isHeader(int position) {
