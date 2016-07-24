@@ -113,6 +113,7 @@ public enum UiManager {
         if (addToBackStack) {
             tx.addToBackStack(null);
         }
+        tx.setCustomAnimations(R.anim.fade_in, R.anim.fade_out, R.anim.fade_in, R.anim.fade_out);
         tx.replace(contentFrameId, fragment);
         tx.commit();
     }

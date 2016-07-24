@@ -15,13 +15,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         UiManager.init(this);
-//        UiManager.INSTANCE.startApp();
-        UiManager.postDelayedToUiThread(new Runnable() {
-            @Override
-            public void run() {
-                UiManager.INSTANCE.startApp();
-            }
-        }, 2000);
+        UiManager.INSTANCE.startApp();
     }
 
     @Override
