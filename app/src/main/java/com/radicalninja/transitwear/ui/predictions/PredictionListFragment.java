@@ -49,6 +49,7 @@ public class PredictionListFragment extends Fragment {
 
     private final TrainApi api = new TrainApi();
 
+    private StopDetailsView stopDetailsView;
     private RecyclerView predictionListView;
     private PredictionsAdapter adapter;
     private Stop stop;
@@ -66,6 +67,7 @@ public class PredictionListFragment extends Fragment {
         stop = getArguments().getParcelable(KEY_STOP);
 
         final View layout = inflater.inflate(R.layout.prediction_list_fragment, container, false);
+        stopDetailsView = (StopDetailsView) layout.findViewById(R.id.stopDetails);
 
         predictionListView = (RecyclerView) layout.findViewById(R.id.predictionRecyclerView);
         predictionListView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -78,6 +80,7 @@ public class PredictionListFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         UiManager.INSTANCE.setTitle(stop.getStopName());
+        stopDetailsView.setStop(stop);
     }
 
     @Override
@@ -114,6 +117,7 @@ public class PredictionListFragment extends Fragment {
         public void onResponse(Call<ArrivalResponse> call, Response<ArrivalResponse> response) {
             if (null != response && null != response.body() && null != response.body().getArrivalPredictions() && response.body().getArrivalPredictions().size() > 0) {
                 adapter.set(response.body().getArrivalPredictions());
+                stopDetailsView.setStop(stop);
                 final String msg = String.format(Locale.US, "%d items received.", response.body().getArrivalPredictions().size());
                 Toast.makeText(getActivity(), msg, Toast.LENGTH_SHORT).show();
             } else {

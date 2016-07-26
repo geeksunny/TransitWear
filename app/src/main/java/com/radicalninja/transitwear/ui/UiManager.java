@@ -39,7 +39,6 @@ public enum UiManager {
     private Toolbar toolbar;
     private FloatingActionButton fab;
 
-    private boolean hasLoaded;
     private boolean isSplashMode;
 
     public static void postToUiThread(final Runnable r) {

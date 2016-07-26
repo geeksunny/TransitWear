@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:CircleProgressView="http://schemas.android.com/apk/res-auto"
+    android:background="@android:color/white"
+    android:elevation="2dp"
+    android:layout_margin="5dp">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/stopName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Clark &amp; Division"/>
+
+        <TextView
+            android:id="@+id/routeName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Red Line"/>
+
+        <TextView
+            android:id="@+id/stopDirection"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="To Howard"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/lastRefreshed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="As of 10:05:01 AM"
+        android:layout_gravity="bottom|center_horizontal"/>
+
+    <com.radicalninja.transitwear.ui.view.SquareFrameLayout
+        android:layout_gravity="top|right"
+        android:layout_width="100dp"
+        android:layout_height="100dp">
+        <at.grabner.circleprogress.CircleProgressView
+            android:id="@+id/progress3"
+            android:layout_gravity="center"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            CircleProgressView:cpv_value="10"
+            CircleProgressView:cpv_maxValue="100"
+            CircleProgressView:cpv_barColor="@color/secondaryBackgroundColor"
+            CircleProgressView:cpv_rimColor="@color/contentBackgroundColor"
+            CircleProgressView:cpv_spinColor="@color/colorAccent"
+            CircleProgressView:cpv_barWidth="10dp"
+            CircleProgressView:cpv_rimWidth="10dp"
+            CircleProgressView:cpv_contourSize="0dp"
+            CircleProgressView:cpv_textMode="Text"/>
+        <at.grabner.circleprogress.CircleProgressView
+            android:id="@+id/progress2"
+            android:layout_gravity="center"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            CircleProgressView:cpv_value="25"
+            CircleProgressView:cpv_maxValue="100"
+            CircleProgressView:cpv_barColor="@color/secondaryBackgroundColor"
+            CircleProgressView:cpv_rimColor="@color/contentBackgroundColor"
+            CircleProgressView:cpv_spinColor="@color/colorAccent"
+            CircleProgressView:cpv_barWidth="10dp"
+            CircleProgressView:cpv_rimWidth="10dp"
+            CircleProgressView:cpv_contourSize="0dp"
+            CircleProgressView:cpv_textMode="Text"/>
+        <at.grabner.circleprogress.CircleProgressView
+            android:id="@+id/progress1"
+            android:layout_gravity="center"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            CircleProgressView:cpv_value="75"
+            CircleProgressView:cpv_maxValue="100"
+            CircleProgressView:cpv_barColor="@color/secondaryBackgroundColor"
+            CircleProgressView:cpv_rimColor="@color/contentBackgroundColor"
+            CircleProgressView:cpv_spinColor="@color/colorAccent"
+            CircleProgressView:cpv_barWidth="10dp"
+            CircleProgressView:cpv_rimWidth="10dp"
+            CircleProgressView:cpv_contourSize="0dp"
+            CircleProgressView:cpv_text="RED"
+            CircleProgressView:cpv_textMode="Text"/>
+    </com.radicalninja.transitwear.ui.view.SquareFrameLayout>
+
+</FrameLayout>
