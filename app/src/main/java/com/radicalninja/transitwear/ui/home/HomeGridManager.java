@@ -41,7 +41,7 @@ public class HomeGridManager {
         layoutManager.setSpanSizeLookup(adapter.spanSizeLookup());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
-        recyclerView.addItemDecoration(new HomeGridItemDecoration(24, 12, 24, 6));
+        recyclerView.addItemDecoration(new HomeGridItemDecoration(24));
         recyclerView.addOnItemTouchListener(new HomeGridItemClickListener(context));
         // recyclerView.setItemAnimator();
     }
@@ -118,9 +118,20 @@ public class HomeGridManager {
         @Override
         public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
             final int layoutPosition = parent.getChildAdapterPosition(view);
+
             final int column = adapter.getColumn(layoutPosition);
-            //super.getItemOffsets(outRect, view, parent, state);
-            outRect.set(left, top, right, bottom);
+            final int thisLeft = isLeftSideEdge(column) ? left : left / 2;
+            final int thisRight = isRightSideEdge(column) ? right : right / 2;
+
+            outRect.set(thisLeft, top / 2, thisRight, bottom / 2);
+        }
+
+        boolean isLeftSideEdge(final int column) {
+            return column <= 1;
+        }
+
+        boolean isRightSideEdge(final int column) {
+            return column == adapter.getSpanCount() || column == 0;
         }
     }
 }
