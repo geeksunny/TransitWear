@@ -22,33 +22,31 @@ public class TrainApi {
 
     private interface TrainClient {
         @GET("ttarrivals.aspx")
-        Call<ArrivalResponse> getArrivals(
-                @Query("key") String key, @Query("mapid") int mapid, @Query("max") int max);
+        Call<ArrivalResponse> getArrivals(@Query("mapid") int mapid, @Query("max") int max);
 
         @GET("ttfollow.aspx")
-        Call<FollowResponse> followTrain(
-                @Query("key") String key, @Query("runnumber") int runNumber);
+        Call<FollowResponse> followTrain(@Query("runnumber") int runNumber);
 
         @GET("ttpositions.aspx")
-        Call<LocationsResponse> getLocations(
-                @Query("key") String key, @Query("rt") String route);
+        Call<LocationsResponse> getLocations(@Query("rt") String route);
 
         @GET("ttpositions.aspx")
-        Call<LocationsResponse> getLocations(
-                @Query("key") String key, @Query("rt") String[] routes);
+        Call<LocationsResponse> getLocations(@Query("rt") String[] routes);
 
     }
 
     public TrainApi() {
         adapter = new RestAdapter<>(BuildConfig.API_ENDPOINT_TRAIN, TrainClient.class);
+        adapter.addUrlKeyValuePair("key", BuildConfig.API_KEY_TRAIN);
+        adapter.addUrlKeyValuePair("outputType", "JSON");
     }
 
     public void getTrainArrivals(final Stop stop, final Callback<ArrivalResponse> callback) {
-        adapter.getClient().getArrivals(BuildConfig.API_KEY_TRAIN, stop.getMapId(), DEFAULT_MAX).enqueue(callback);
+        adapter.getClient().getArrivals(stop.getMapId(), DEFAULT_MAX).enqueue(callback);
     }
 
     public void testLocations() {
-        adapter.getClient().getLocations(BuildConfig.API_KEY_TRAIN, "red").enqueue(
+        adapter.getClient().getLocations("red").enqueue(
                 new Callback<LocationsResponse>() {
                     @Override
                     public void onFailure(Call<LocationsResponse> call, Throwable t) {
@@ -64,7 +62,7 @@ public class TrainApi {
     }
 
     public void testLocationsList() {
-        adapter.getClient().getLocations(BuildConfig.API_KEY_TRAIN, new String[]{"red","brn"}).enqueue(
+        adapter.getClient().getLocations(new String[]{"red","brn"}).enqueue(
                 new Callback<LocationsResponse>() {
                     @Override
                     public void onFailure(Call<LocationsResponse> call, Throwable t) {
@@ -80,7 +78,7 @@ public class TrainApi {
     }
 
     public void testFollow() {
-        adapter.getClient().followTrain(BuildConfig.API_KEY_TRAIN, 40380).enqueue(
+        adapter.getClient().followTrain(40380).enqueue(
                 new Callback<FollowResponse>() {
                     @Override
                     public void onFailure(Call<FollowResponse> call, Throwable t) {
@@ -96,7 +94,7 @@ public class TrainApi {
     }
 
     public void testArrivals() {
-        adapter.getClient().getArrivals(BuildConfig.API_KEY_TRAIN, 40380, 5).enqueue(
+        adapter.getClient().getArrivals(40380, 5).enqueue(
                 new Callback<ArrivalResponse>() {
                     @Override
                     public void onFailure(Call<ArrivalResponse> call, Throwable t) {

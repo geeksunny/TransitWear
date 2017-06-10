@@ -5,7 +5,6 @@ import com.radicalninja.transitwear.data.api.bus.BusTimeResponse;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
-import retrofit2.http.Query;
 
 public class BusApi {
 
@@ -13,15 +12,17 @@ public class BusApi {
 
     private interface BusClient {
         @GET("gettime")
-        Call<BusTimeResponse> getTime(@Query("key") String apiKey);
+        Call<BusTimeResponse> getTime();
     }
 
     public BusApi() {
         adapter = new RestAdapter<>(BuildConfig.API_ENDPOINT_BUS, BusClient.class);
+        adapter.addUrlKeyValuePair("key", BuildConfig.API_KEY_BUS);
+        adapter.addUrlKeyValuePair("outputType", "JSON");
     }
 
     public void getServerTime(final ResponseStateCallback<BusTimeResponse> callback) {
-        adapter.getClient().getTime(BuildConfig.API_KEY_BUS).enqueue(callback);
+        adapter.getClient().getTime().enqueue(callback);
     }
 
 }
