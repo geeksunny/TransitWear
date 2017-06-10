@@ -1,53 +1,53 @@
 package com.radicalninja.transitwear.data.api.train;
 
-import org.simpleframework.xml.Element;
+import com.google.gson.annotations.SerializedName;
 
 public class BaseInnerResponse {
 
-    @Element(name = "heading", required = false)
+    @SerializedName("heading")
     String heading;
 
-    @Element(name = "prdt", required = false)
+    @SerializedName("prdt")
     String predictionTime;
 
-    @Element(name = "destNm", required = false)
+    @SerializedName("destNm")
     String destinationName;
 
-    @Element(name = "flags", required = false)
+    @SerializedName("flags")
     String flags;
 
-    @Element(name = "destSt", required = false)
+    @SerializedName("destSt")
     String destinationStopId;
 
-    @Element(name = "lon", required = false)
+    @SerializedName("lon")
     String lon;
 
-    @Element(name = "isApp", required = false)
+    @SerializedName("isApp")
     String isApproaching;
 
-    @Element(name = "trDr", required = false)
+    @SerializedName("trDr")
     String trainDirectionCode;
 
-    @Element(name = "isDly", required = false)
+    @SerializedName("isDly")
     String isDelayed;
 
     /**
      * Run number of train being predicted for
      */
-    @Element(name = "rn", required = false)
+    @SerializedName("rn")
     String runNumber;
 
     /**
      * Date-time format stamp for when a train is expected to arrive/depart:
      * yyyyMMdd HH:mm:ss (24-hour format, time local to Chicago)
      */
-    @Element(name = "arrT", required = false)
+    @SerializedName("arrT")
     String arrivalTime;
 
     /**
      * Longtitude position
      */
-    @Element(name = "lat", required = false)
+    @SerializedName("lat")
     String lat;
 
     public String getHeading() {

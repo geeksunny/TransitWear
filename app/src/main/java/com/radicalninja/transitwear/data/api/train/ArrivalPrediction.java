@@ -1,28 +1,29 @@
 package com.radicalninja.transitwear.data.api.train;
 
-import org.simpleframework.xml.Element;
+import com.google.gson.annotations.SerializedName;
+
 
 public class ArrivalPrediction extends BaseInnerResponse {
 
-    @Element(name = "stpId", required = false)
+    @SerializedName("stpId")
     String stopId;
 
-    @Element(name = "rt", required = false)
+    @SerializedName("rt")
     String route;
 
-    @Element(name = "staId", required = false)
+    @SerializedName("staId")
     String stationId;
 
-    @Element(name = "isSch", required = false)
+    @SerializedName("isSch")
     String isSch;
 
-    @Element(name = "staNm", required = false)
+    @SerializedName("staNm")
     String stationName;
 
-    @Element(name = "isFlt", required = false)
+    @SerializedName("isFlt")
     String isFault;
 
-    @Element(name = "stpDe", required = false)
+    @SerializedName("stpDe")
     String stopDescription;
 
     public String getStopId() {

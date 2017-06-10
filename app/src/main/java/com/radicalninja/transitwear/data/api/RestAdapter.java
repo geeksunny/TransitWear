@@ -9,7 +9,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 import retrofit2.Retrofit;
-import retrofit2.converter.simplexml.SimpleXmlConverterFactory;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RestAdapter<T> {
 
@@ -26,7 +26,7 @@ public class RestAdapter<T> {
         return new Retrofit.Builder()
                 .baseUrl(apiServerUrl)
                 .client(buildHttpClient())
-                .addConverterFactory(SimpleXmlConverterFactory.create(/*Serializer*/))
+                .addConverterFactory(GsonConverterFactory.create(/*gson object*/))
                 .build();
     }
 

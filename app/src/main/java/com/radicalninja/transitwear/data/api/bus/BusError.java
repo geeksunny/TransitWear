@@ -1,19 +1,19 @@
 package com.radicalninja.transitwear.data.api.bus;
 
-import org.simpleframework.xml.Element;
+import com.google.gson.annotations.SerializedName;
 
 public class BusError {
 
-    @Element(name="msg", required = true)
+    @SerializedName("msg")
     String message;
 
-    @Element(name="pid", required = false)
+    @SerializedName("pid")
     String patternId;
 
-    @Element(name="rt", required = false)
+    @SerializedName("rt")
     String route;
 
-    @Element(name="vid", required = false)
+    @SerializedName("vid")
     String vehicleId;
 
     public String getMessage() { return this.message; }

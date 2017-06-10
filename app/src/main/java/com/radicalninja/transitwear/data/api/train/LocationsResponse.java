@@ -1,16 +1,13 @@
 package com.radicalninja.transitwear.data.api.train;
 
-import org.simpleframework.xml.Attribute;
-import org.simpleframework.xml.Element;
-import org.simpleframework.xml.ElementList;
-import org.simpleframework.xml.Root;
+import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-@Root(name = "ctatt")
+//@Root(name = "ctatt")
 public class LocationsResponse extends BaseOuterResponse {
 
-    @ElementList(name = "route", inline = true, required = false)
+    @SerializedName("route")
     List<Route> routes;
 
 
@@ -19,10 +16,10 @@ public class LocationsResponse extends BaseOuterResponse {
 
     public static class Route {
 
-        @ElementList(name = "train", inline = true, required = false)
+        @SerializedName("train")
         List<Train> trains;
 
-        @Attribute(name="name", required = false)
+        @SerializedName("name")
         String name;
 
 
@@ -36,13 +33,13 @@ public class LocationsResponse extends BaseOuterResponse {
 
     public static class Train extends BaseInnerResponse {
 
-        @Element(name="nextStaId", required = false)
+        @SerializedName("nextStaId")
         String nextStaId;
 
-        @Element(name="nextStpId", required = false)
+        @SerializedName("nextStpId")
         String nextStpId;
 
-        @Element(name="nextStaNm", required = false)
+        @SerializedName("nextStaNm")
         String nextStaNm;
 
 

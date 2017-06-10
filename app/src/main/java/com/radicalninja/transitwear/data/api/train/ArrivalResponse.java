@@ -1,17 +1,16 @@
 package com.radicalninja.transitwear.data.api.train;
 
-import org.simpleframework.xml.ElementList;
-import org.simpleframework.xml.Root;
+import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-@Root(name="ctatt")
+//@Root(name="ctatt")
 public class ArrivalResponse extends BaseOuterResponse {
 
     /**
      * A list of prediction records
      */
-    @ElementList(name="eta", required=false, entry="eta", inline=true)
+    @SerializedName("eta")
     List<ArrivalPrediction> arrivalPredictions;
 
     public List<ArrivalPrediction> getArrivalPredictions() {return this.arrivalPredictions;}

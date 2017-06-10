@@ -1,15 +1,14 @@
 package com.radicalninja.transitwear.data.api.bus;
 
-import org.simpleframework.xml.Element;
-import org.simpleframework.xml.Root;
+import com.google.gson.annotations.SerializedName;
 
-@Root(name = "bustime-response")
+//@Root(name = "bustime-response")
 public class BusTimeResponse {
 
-    @Element(name="tm", required = false)
+    @SerializedName("tm")
     String time;
 
-    @Element(name="error", required = false)
+    @SerializedName("error")
     BusError error;
 
     public String getTime() { return this.time; }
