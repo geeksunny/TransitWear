@@ -1,9 +1,12 @@
 package com.radicalninja.transitwear.data.api;
 
+import android.text.TextUtils;
+
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import okhttp3.HttpUrl;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -15,6 +18,7 @@ public class RestAdapter<T> {
 
     private final T client;
     private final Map<String, String> requiredHeaders = new HashMap<>();
+    private final Map<String, String> requiredUrlKeyValuePairs = new HashMap<>();
     private final Object lock = new Object();
 
     protected RestAdapter(final String apiServerUrl, final Class<T> clientInterface) {
@@ -63,7 +67,30 @@ public class RestAdapter<T> {
         }
     }
 
-    class RestInterceptor implements Interceptor {
+    public void addUrlKeyValuePair(final String key, final String value) {
+        synchronized (lock) {
+            requiredUrlKeyValuePairs.put(key, value);
+        }
+    }
+
+    public boolean removeUrlKeyValuePair(final String name) {
+        boolean wasRemoved = false;
+        synchronized (lock) {
+            if (requiredUrlKeyValuePairs.containsKey(name)) {
+                wasRemoved = true;
+                requiredUrlKeyValuePairs.remove(name);
+            }
+        }
+        return wasRemoved;
+    }
+
+    public void removeAllKeyValuePairs() {
+        synchronized (lock) {
+            requiredUrlKeyValuePairs.clear();
+        }
+    }
+
+    private class RestInterceptor implements Interceptor {
         @Override
         public Response intercept(Chain chain) throws IOException {
             if (requiredHeaders.isEmpty()) {
@@ -71,17 +98,44 @@ public class RestAdapter<T> {
             }
             final Request baseRequest = chain.request();
             final Request.Builder builder = baseRequest.newBuilder();
+
+            setupUrl(builder, baseRequest.url());
+            setupHeaders(builder);
+
+            return chain.proceed(builder.build());
+        }
+
+        void setupUrl(final Request.Builder builder, final HttpUrl url) {
+            if (requiredUrlKeyValuePairs.isEmpty()) {
+                return;
+            }
+            final Map<String, String> valuesCopy;
+            synchronized (lock) {
+                valuesCopy = new HashMap<>(requiredUrlKeyValuePairs);
+            }
+            final HttpUrl.Builder urlBuilder = url.newBuilder();
+            for (final Map.Entry<String, String> urlValue : valuesCopy.entrySet()) {
+                final String key = urlValue.getKey();
+                final String value = urlValue.getValue();
+                if (TextUtils.isEmpty(key) || TextUtils.isEmpty(value)) {
+                    continue;
+                }
+                urlBuilder.addQueryParameter(key, value);
+            }
+            builder.url(urlBuilder.build());
+        }
+
+        void setupHeaders(final Request.Builder builder) {
+            if (requiredHeaders.isEmpty()) {
+                return;
+            }
             final Map<String, String> headerCopy;
             synchronized (lock) {
                 headerCopy = new HashMap<>(requiredHeaders);
             }
-            //noinspection ConstantConditions
-            if (headerCopy != null) {
-                for (final Map.Entry<String, String> header : headerCopy.entrySet()) {
-                    builder.addHeader(header.getKey(), header.getValue());
-                }
+            for (final Map.Entry<String, String> header : headerCopy.entrySet()) {
+                builder.addHeader(header.getKey(), header.getValue());
             }
-            return chain.proceed(builder.build());
         }
     }
 
