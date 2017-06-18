@@ -1,8 +1,9 @@
 package com.radicalninja.transitwear.data.api.bus;
 
 import com.google.gson.annotations.SerializedName;
+import com.radicalninja.transitwear.util.NestedIn;
 
-//@Root(name = "bustime-response")
+@NestedIn("bustime-response")
 public class BusTimeResponse {
 
     @SerializedName("tm")

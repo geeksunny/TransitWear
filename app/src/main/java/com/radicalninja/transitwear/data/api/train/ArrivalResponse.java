@@ -1,10 +1,11 @@
 package com.radicalninja.transitwear.data.api.train;
 
 import com.google.gson.annotations.SerializedName;
+import com.radicalninja.transitwear.util.NestedIn;
 
 import java.util.List;
 
-//@Root(name="ctatt")
+@NestedIn("ctatt")
 public class ArrivalResponse extends BaseOuterResponse {
 
     /**

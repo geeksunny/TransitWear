@@ -2,6 +2,10 @@ package com.radicalninja.transitwear.data.api;
 
 import android.text.TextUtils;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.radicalninja.transitwear.util.NestedIn;
+
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -17,6 +21,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RestAdapter<T> {
 
     private final T client;
+    private final Gson gson = buildGson();
     private final Map<String, String> requiredHeaders = new HashMap<>();
     private final Map<String, String> requiredUrlKeyValuePairs = new HashMap<>();
     private final Object lock = new Object();
@@ -30,7 +35,7 @@ public class RestAdapter<T> {
         return new Retrofit.Builder()
                 .baseUrl(apiServerUrl)
                 .client(buildHttpClient())
-                .addConverterFactory(GsonConverterFactory.create(/*gson object*/))
+                .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
     }
 
@@ -40,8 +45,22 @@ public class RestAdapter<T> {
                 .build();
     }
 
+    protected Gson buildGson() {
+        return new GsonBuilder()
+//                .excludeFieldsWithoutExposeAnnotation()
+//                .serializeNulls()
+//                .setPrettyPrinting()
+                .registerTypeAdapterFactory(new NestedIn.AdapterFactory())
+                .create();
+    }
+
     protected T getClient() {
         return client;
+    }
+
+    protected Gson getGson() {
+        // TODO: Determine if this is necessary.
+        return gson;
     }
 
     public void addHeader(final String name, final String value) {
@@ -93,7 +112,7 @@ public class RestAdapter<T> {
     private class RestInterceptor implements Interceptor {
         @Override
         public Response intercept(Chain chain) throws IOException {
-            if (requiredHeaders.isEmpty()) {
+            if (requiredHeaders.isEmpty() && requiredUrlKeyValuePairs.isEmpty()) {
                 return chain.proceed(chain.request());
             }
             final Request baseRequest = chain.request();
