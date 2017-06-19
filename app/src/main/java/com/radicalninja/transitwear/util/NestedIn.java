@@ -22,16 +22,14 @@ public @interface NestedIn {
         @Override
         public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
             final Class<? super T> targetClass = type.getRawType();
-            final NestedIn rootAnnotation = targetClass.getAnnotation(NestedIn.class);
+            final NestedIn nestedIn = targetClass.getAnnotation(NestedIn.class);
 
-            if (null != rootAnnotation) {
-                if (TextUtils.isEmpty(rootAnnotation.value())) {
+            if (null != nestedIn) {
+                if (TextUtils.isEmpty(nestedIn.value())) {
                     throw new RuntimeException("Annotation value must not be empty!");
-                    // TODO: Can this be set as lint check in the NestedIn code itself?
                 }
                 final TypeAdapter<T> rootAdapter = gson.getDelegateAdapter(this, type);
-                return new Adapter<>(rootAdapter, rootAnnotation.value());
-                // TODO: Should this adapter get cached?
+                return new Adapter<>(rootAdapter, nestedIn.value());
             }
 
             return null;
@@ -41,18 +39,18 @@ public @interface NestedIn {
     class Adapter<T> extends TypeAdapter<T> {
 
         final String nestedKey;
-        final TypeAdapter<T> nestedTypeAdapter;
+        final TypeAdapter<T> delegate;
 
-        Adapter(final TypeAdapter<T> nestedTypeAdapter, final String nestedKey) {
+        Adapter(final TypeAdapter<T> delegate, final String nestedKey) {
             this.nestedKey = nestedKey;
-            this.nestedTypeAdapter = nestedTypeAdapter;
+            this.delegate = delegate;
         }
 
         @Override
         public void write(JsonWriter out, T value) throws IOException {
             out.beginObject();
             out.name(nestedKey);
-            nestedTypeAdapter.write(out, value);
+            delegate.write(out, value);
             out.endObject();
         }
 
@@ -61,7 +59,7 @@ public @interface NestedIn {
             in.beginObject();
             while (in.hasNext()) {
                 if (nestedKey.equals(in.nextName())) {
-                    return nestedTypeAdapter.read(in);
+                    return delegate.read(in);
                 }
             }
             in.endObject();
