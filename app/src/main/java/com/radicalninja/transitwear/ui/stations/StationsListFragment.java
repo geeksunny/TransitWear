@@ -21,6 +21,8 @@ import com.raizlabs.android.dbflow.structure.database.transaction.QueryTransacti
 import com.raizlabs.android.dbflow.structure.database.transaction.Transaction;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class StationsListFragment extends Fragment {
@@ -99,6 +101,13 @@ public class StationsListFragment extends Fragment {
             for (final TrainStop_Route stop : tResult) {
                 stops.add(stop.getTrainStop());
             }
+            Collections.sort(stops, new Comparator<Stop>() {
+                @Override
+                public int compare(Stop o1, Stop o2) {
+                    // TODO: try/catch?
+                    return Integer.compare(o1.getStopId(), o2.getStopId());
+                }
+            });
             adapter.add(stops);
         }
 

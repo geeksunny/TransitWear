@@ -8,13 +8,14 @@ import java.util.Locale;
 public class LatLong implements Serializable {
 
     private static final String FORMAT_STRING = "(%f,%f)";
+    private static final double RADIUS = 6378137;   // approximate Earth radius, in meters
 
-    double latitude, longitude;
+    private double latitude, longitude;
 
     public LatLong() { }
 
     public LatLong(final String coordinates) {
-        // (41.85177331, -87.75669201)
+        // Uses toString() formatting. ex: (41.85177331, -87.75669201)
         final String[] coords = coordinates.replaceAll("[\\(\\)\\s]", "").split(",");
         latitude = Double.parseDouble(coords[0]);
         longitude = Double.parseDouble(coords[1]);
@@ -23,6 +24,19 @@ public class LatLong implements Serializable {
     public LatLong(final double latitude, final double longitude) {
         this.latitude = latitude;
         this.longitude = longitude;
+    }
+
+    public double distance(final LatLong from) {
+        // https://en.wikipedia.org/wiki/Great-circle_distance
+        final double deltaLat = this.latitude - from.latitude;
+        final double deltaLon = this.longitude - from.longitude;
+        // TODO: Clean up this ugly mess of nested math.
+        final double angle = 2 * Math.asin(Math.sqrt(
+                Math.pow(Math.sin(deltaLat/2), 2) +
+                        Math.cos(from.latitude) * Math.cos(this.latitude) *
+                                Math.pow(Math.sin(deltaLon/2), 2)
+        ));
+        return RADIUS * angle;
     }
 
     @Override
